@@ -1,0 +1,1013 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.4.1 (Python 3.12.10 on win32)" generated="2026-07-15T11:48:00.578773" rpa="false" schemaversion="5">
+<suite id="s1" name="Tests" source="C:\Users\saint\progetti\IconifyNavigator\robot\tests">
+<suite id="s1-s1" name="V0.0.1 Acceptance" source="C:\Users\saint\progetti\IconifyNavigator\robot\tests\v0.0.1_acceptance.robot">
+<test id="s1-s1-t1" name="Application Loads Without Crashing" line="17">
+<kw name="Open Iconify Navigator" owner="app" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-07-15T11:48:01.239577" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Users\\saint\\progetti\\IconifyNavigator\\robot\\results\\angular\\browser\\traces\\temp\\f8e03cbd-2c66-4b81-96ef-6eedabb79bed"}</msg>
+<msg time="2026-07-15T11:48:01.289586" level="INFO">Starting Browser process C:\Users\saint\AppData\Roaming\Python\Python312\site-packages\Browser\wrapper\index.js using at 127.0.0.1:53478</msg>
+<msg time="2026-07-15T11:48:04.690351" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Users\\saint\\progetti\\IconifyNavigator\\robot\\results\\angular\\browser\\traces\\temp\\f8e03cbd-2c66-4b81-96ef-6eedabb79bed"}</msg>
+<arg>${BROWSER_TYPE}</arg>
+<arg>headless=${HEADLESS}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2026-07-15T11:48:01.238579" elapsed="3.451772"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2026-07-15T11:48:06.248307" level="INFO">Successfully initialized new page object and opened url: http://localhost:4200</msg>
+<msg time="2026-07-15T11:48:06.248307" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<arg>${APP_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2026-07-15T11:48:04.691352" elapsed="1.556955"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-07-15T11:48:06.313285" level="INFO">Waited for Element with selector h1 at state visible</msg>
+<arg>h1</arg>
+<arg>visible</arg>
+<arg>timeout=10s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-07-15T11:48:06.249309" elapsed="0.064975"/>
+</kw>
+<doc>Opens a fresh browser window and navigates to the app.
+Waits until the main heading is visible before returning.</doc>
+<status status="PASS" start="2026-07-15T11:48:01.237579" elapsed="5.076705"/>
+</kw>
+<kw name="Get Text" owner="Browser">
+<msg time="2026-07-15T11:48:06.374454" level="INFO">Text: ['Iconify Navigator']</msg>
+<arg>h1</arg>
+<arg>==</arg>
+<arg>Iconify Navigator</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-07-15T11:48:06.314284" elapsed="0.060170"/>
+</kw>
+<kw name="Get Element Count" owner="Browser">
+<arg>.error</arg>
+<arg>==</arg>
+<arg>0</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<status status="PASS" start="2026-07-15T11:48:06.375460" elapsed="0.010511"/>
+</kw>
+<kw name="Close Browser" owner="Browser" type="TEARDOWN">
+<msg time="2026-07-15T11:48:07.101490" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-07-15T11:48:06.386969" elapsed="0.714521"/>
+</kw>
+<doc>The main heading must be rendered and no error banner
+must be visible after the page finishes loading.</doc>
+<status status="PASS" start="2026-07-15T11:48:01.236578" elapsed="5.865925"/>
+</test>
+<test id="s1-s1-t2" name="Available Icon Sets Are Listed On Startup" line="23">
+<kw name="Open Iconify Navigator" owner="app" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-07-15T11:48:07.157024" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Users\\saint\\progetti\\IconifyNavigator\\robot\\results\\angular\\browser\\traces\\temp\\ce244c64-906d-4ab7-b0ab-25a33185a1d9"}</msg>
+<msg time="2026-07-15T11:48:08.026318" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Users\\saint\\progetti\\IconifyNavigator\\robot\\results\\angular\\browser\\traces\\temp\\ce244c64-906d-4ab7-b0ab-25a33185a1d9"}</msg>
+<arg>${BROWSER_TYPE}</arg>
+<arg>headless=${HEADLESS}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2026-07-15T11:48:07.155021" elapsed="0.871297"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2026-07-15T11:48:09.176985" level="INFO">Successfully initialized new page object and opened url: http://localhost:4200</msg>
+<msg time="2026-07-15T11:48:09.177985" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<arg>${APP_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2026-07-15T11:48:08.027321" elapsed="1.150664"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-07-15T11:48:09.228040" level="INFO">Waited for Element with selector h1 at state visible</msg>
+<arg>h1</arg>
+<arg>visible</arg>
+<arg>timeout=10s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-07-15T11:48:09.177985" elapsed="0.051053"/>
+</kw>
+<doc>Opens a fresh browser window and navigates to the app.
+Waits until the main heading is visible before returning.</doc>
+<status status="PASS" start="2026-07-15T11:48:07.154024" elapsed="2.075014"/>
+</kw>
+<kw name="Collections Are Loaded" owner="app">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-07-15T11:48:11.630535" level="INFO">Waited for Element with selector .collection-card &gt;&gt; nth=0 at state visible</msg>
+<arg>.collection-card &gt;&gt; nth=0</arg>
+<arg>visible</arg>
+<arg>timeout=${COLLECTIONS_TIMEOUT}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-07-15T11:48:09.230114" elapsed="2.400421"/>
+</kw>
+<doc>Blocks until at least one collection card is visible,
+meaning the /collections API call has completed.
+Uses &gt;&gt; nth=0 to target the first card and avoid strict-mode
+violations (the API returns 200+ collections).</doc>
+<status status="PASS" start="2026-07-15T11:48:09.229038" elapsed="2.402497"/>
+</kw>
+<kw name="Get Element Count" owner="Browser">
+<arg>.collection-card</arg>
+<arg>&gt;</arg>
+<arg>0</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<status status="PASS" start="2026-07-15T11:48:11.632536" elapsed="0.019735"/>
+</kw>
+<kw name="Close Browser" owner="Browser" type="TEARDOWN">
+<msg time="2026-07-15T11:48:12.900724" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-07-15T11:48:11.653269" elapsed="1.247455"/>
+</kw>
+<doc>The collections list must contain at least one entry once
+the /collections response has been received.</doc>
+<status status="PASS" start="2026-07-15T11:48:07.144037" elapsed="5.756687"/>
+</test>
+<test id="s1-s1-t3" name="Icons Are Not Preloaded On Startup" line="29">
+<kw name="Open Iconify Navigator" owner="app" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-07-15T11:48:12.926808" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Users\\saint\\progetti\\IconifyNavigator\\robot\\results\\angular\\browser\\traces\\temp\\f18a2aef-b9e9-447d-8e36-330099a4bf51"}</msg>
+<msg time="2026-07-15T11:48:13.751182" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Users\\saint\\progetti\\IconifyNavigator\\robot\\results\\angular\\browser\\traces\\temp\\f18a2aef-b9e9-447d-8e36-330099a4bf51"}</msg>
+<arg>${BROWSER_TYPE}</arg>
+<arg>headless=${HEADLESS}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2026-07-15T11:48:12.924806" elapsed="0.827377"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2026-07-15T11:48:14.880045" level="INFO">Successfully initialized new page object and opened url: http://localhost:4200</msg>
+<msg time="2026-07-15T11:48:14.880045" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<arg>${APP_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2026-07-15T11:48:13.753183" elapsed="1.126862"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-07-15T11:48:14.932352" level="INFO">Waited for Element with selector h1 at state visible</msg>
+<arg>h1</arg>
+<arg>visible</arg>
+<arg>timeout=10s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-07-15T11:48:14.881478" elapsed="0.050874"/>
+</kw>
+<doc>Opens a fresh browser window and navigates to the app.
+Waits until the main heading is visible before returning.</doc>
+<status status="PASS" start="2026-07-15T11:48:12.923808" elapsed="2.009547"/>
+</kw>
+<kw name="Collections Are Loaded" owner="app">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-07-15T11:48:17.375623" level="INFO">Waited for Element with selector .collection-card &gt;&gt; nth=0 at state visible</msg>
+<arg>.collection-card &gt;&gt; nth=0</arg>
+<arg>visible</arg>
+<arg>timeout=${COLLECTIONS_TIMEOUT}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-07-15T11:48:14.934353" elapsed="2.445263"/>
+</kw>
+<doc>Blocks until at least one collection card is visible,
+meaning the /collections API call has completed.
+Uses &gt;&gt; nth=0 to target the first card and avoid strict-mode
+violations (the API returns 200+ collections).</doc>
+<status status="PASS" start="2026-07-15T11:48:14.933355" elapsed="2.446261"/>
+</kw>
+<kw name="Get Element Count" owner="Browser">
+<arg>.right-panel .icon-img</arg>
+<arg>==</arg>
+<arg>0</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<status status="PASS" start="2026-07-15T11:48:17.379616" elapsed="0.014965"/>
+</kw>
+<kw name="Close Browser" owner="Browser" type="TEARDOWN">
+<msg time="2026-07-15T11:48:18.276209" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-07-15T11:48:17.395582" elapsed="0.880627"/>
+</kw>
+<doc>No full-size icon images must appear in the right panel before
+the user explicitly opens a collection.
+Collection cards may show preview thumbnails (.collection-preview-img)
+but the right-panel icon grid (.icon-img) must remain empty.</doc>
+<status status="PASS" start="2026-07-15T11:48:12.914810" elapsed="5.361399"/>
+</test>
+<doc>Acceptance tests for Iconify Navigator — release 0.0.1.
+
+Criteria:
+- The application must not crash.
+- The application must not preload icon data on startup.
+- The application must display the list of available icon sets
+  fetched from the Iconify server using the /collections endpoint.
+
+Prerequisites: the app must be running on http://localhost:4200.</doc>
+<status status="PASS" start="2026-07-15T11:48:00.657897" elapsed="17.629311"/>
+</suite>
+<suite id="s1-s2" name="V0.0.2 Acceptance" source="C:\Users\saint\progetti\IconifyNavigator\robot\tests\v0.0.2_acceptance.robot">
+<test id="s1-s2-t1" name="Collection Cards Show Name Label" line="21">
+<kw name="Open Iconify Navigator" owner="app" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-07-15T11:48:18.318217" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Users\\saint\\progetti\\IconifyNavigator\\robot\\results\\angular\\browser\\traces\\temp\\fca2b5c5-945b-4c4b-8ac0-cb987c14d1e3"}</msg>
+<msg time="2026-07-15T11:48:18.959735" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Users\\saint\\progetti\\IconifyNavigator\\robot\\results\\angular\\browser\\traces\\temp\\fca2b5c5-945b-4c4b-8ac0-cb987c14d1e3"}</msg>
+<arg>${BROWSER_TYPE}</arg>
+<arg>headless=${HEADLESS}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2026-07-15T11:48:18.317217" elapsed="0.642518"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2026-07-15T11:48:20.059571" level="INFO">Successfully initialized new page object and opened url: http://localhost:4200</msg>
+<msg time="2026-07-15T11:48:20.059571" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<arg>${APP_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2026-07-15T11:48:18.960734" elapsed="1.098837"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-07-15T11:48:20.124460" level="INFO">Waited for Element with selector h1 at state visible</msg>
+<arg>h1</arg>
+<arg>visible</arg>
+<arg>timeout=10s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-07-15T11:48:20.060571" elapsed="0.063889"/>
+</kw>
+<doc>Opens a fresh browser window and navigates to the app.
+Waits until the main heading is visible before returning.</doc>
+<status status="PASS" start="2026-07-15T11:48:18.317217" elapsed="1.807243"/>
+</kw>
+<kw name="Collections Are Loaded" owner="app">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-07-15T11:48:22.520132" level="INFO">Waited for Element with selector .collection-card &gt;&gt; nth=0 at state visible</msg>
+<arg>.collection-card &gt;&gt; nth=0</arg>
+<arg>visible</arg>
+<arg>timeout=${COLLECTIONS_TIMEOUT}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-07-15T11:48:20.125463" elapsed="2.394669"/>
+</kw>
+<doc>Blocks until at least one collection card is visible,
+meaning the /collections API call has completed.
+Uses &gt;&gt; nth=0 to target the first card and avoid strict-mode
+violations (the API returns 200+ collections).</doc>
+<status status="PASS" start="2026-07-15T11:48:20.125463" elapsed="2.395670"/>
+</kw>
+<kw name="Get Text" owner="Browser">
+<msg time="2026-07-15T11:48:22.708157" level="INFO">Text: ['Name: Material Symbols\n\nCategory: Material\n\nTags: Has Padding\n\nOpen']</msg>
+<arg>.collection-card &gt;&gt; nth=0</arg>
+<arg>contains</arg>
+<arg>Name:</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-07-15T11:48:22.521133" elapsed="0.187024"/>
+</kw>
+<kw name="Close Browser" owner="Browser" type="TEARDOWN">
+<msg time="2026-07-15T11:48:23.437858" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-07-15T11:48:22.709157" elapsed="0.728701"/>
+</kw>
+<doc>Every visible collection must display a "Name:" label so
+the user can identify the icon set.</doc>
+<status status="PASS" start="2026-07-15T11:48:18.309220" elapsed="5.129637"/>
+</test>
+<test id="s1-s2-t2" name="Collections List Shows Category And Tags Labels" line="27">
+<kw name="Open Iconify Navigator" owner="app" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-07-15T11:48:23.470864" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Users\\saint\\progetti\\IconifyNavigator\\robot\\results\\angular\\browser\\traces\\temp\\bd6bbc4a-c637-4f7e-899c-fc263cfc0882"}</msg>
+<msg time="2026-07-15T11:48:24.261282" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Users\\saint\\progetti\\IconifyNavigator\\robot\\results\\angular\\browser\\traces\\temp\\bd6bbc4a-c637-4f7e-899c-fc263cfc0882"}</msg>
+<arg>${BROWSER_TYPE}</arg>
+<arg>headless=${HEADLESS}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2026-07-15T11:48:23.468862" elapsed="0.792420"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2026-07-15T11:48:25.253010" level="INFO">Successfully initialized new page object and opened url: http://localhost:4200</msg>
+<msg time="2026-07-15T11:48:25.254009" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<arg>${APP_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2026-07-15T11:48:24.261282" elapsed="0.992727"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-07-15T11:48:25.297668" level="INFO">Waited for Element with selector h1 at state visible</msg>
+<arg>h1</arg>
+<arg>visible</arg>
+<arg>timeout=10s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-07-15T11:48:25.254009" elapsed="0.044314"/>
+</kw>
+<doc>Opens a fresh browser window and navigates to the app.
+Waits until the main heading is visible before returning.</doc>
+<status status="PASS" start="2026-07-15T11:48:23.467863" elapsed="1.830460"/>
+</kw>
+<kw name="Collections Are Loaded" owner="app">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-07-15T11:48:27.756801" level="INFO">Waited for Element with selector .collection-card &gt;&gt; nth=0 at state visible</msg>
+<arg>.collection-card &gt;&gt; nth=0</arg>
+<arg>visible</arg>
+<arg>timeout=${COLLECTIONS_TIMEOUT}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-07-15T11:48:25.299334" elapsed="2.457467"/>
+</kw>
+<doc>Blocks until at least one collection card is visible,
+meaning the /collections API call has completed.
+Uses &gt;&gt; nth=0 to target the first card and avoid strict-mode
+violations (the API returns 200+ collections).</doc>
+<status status="PASS" start="2026-07-15T11:48:25.298323" elapsed="2.458478"/>
+</kw>
+<kw name="Get Text" owner="Browser">
+<msg time="2026-07-15T11:48:27.799802" level="INFO">Text: ['Name: Material Symbols\n\nCategory: Material\n\nTags: Has Padding\n\nOpen\n\nName: Material Symbols Light\n\nCategory: Material\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Google Material Icons\n\nCategory: Material\n\nOpen\n\nName: Material Design Icons\n\nCategory: Material\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Material Design Light\n\nCategory: Material\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Material Line Icons\n\nCategory: Material\n\nTags: Precise Shapes, Has Padding, Uses Stroke, Contains Animations\n\nOpen\n\nName: Solar\n\nCategory: UI 24px\n\nTags: Has Padding, Uses Stroke\n\nOpen\n\nName: Tabler Icons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: Boxicons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: MingCute Icon\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Remix Icon\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Myna UI Icons\n\nCategory: UI 24px\n\nTags: Has Padding, Uses Stroke\n\nOpen\n\nName: IconaMoon\n\nCategory: UI 24px\n\nTags: Has Padding, Uses Stroke\n\nOpen\n\nName: Iconoir\n\nCategory: UI 24px\n\nTags: Has Padding, Uses Stroke\n\nOpen\n\nName: Lucide\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: Lucide Lab\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: Unicons\n\nCategory: UI 24px\n\nTags: Has Padding\n\nOpen\n\nName: TDesign Icons\n\nCategory: UI 24px\n\nTags: Uses Stroke\n\nOpen\n\nName: Sargam Icons\n\nCategory: UI 24px\n\nTags: Has Padding, Uses Stroke\n\nOpen\n\nName: Majesticons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: css.gg\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Flowbite Icons\n\nCategory: UI 24px\n\nTags: Uses Stroke\n\nOpen\n\nName: Basil\n\nCategory: UI 24px\n\nTags: Has Padding\n\nOpen\n\nName: Pixelarticons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Pixel Icon\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Akar Icons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: coolicons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: ProIcons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: Typicons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Meteor Icons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: Prime Icons\n\nCategory: UI 24px\n\nTags: Has Padding\n\nOpen\n\nName: Circum Icons\n\nCategory: UI 24px\n\nTags: Has Padding\n\nOpen\n\nName: Feather Icon\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: EOS Icons\n\nCategory: UI 24px\n\nOpen\n\nName: Bitcoin Icons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Humbleicons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: Unicons Monochrome\n\nCategory: UI 24px\n\nTags: Has Padding\n\nOpen\n\nName: Unicons Thin Line\n\nCategory: UI 24px\n\nTags: Has Padding\n\nOpen\n\nName: Unicons Solid\n\nCategory: UI 24px\n\nTags: Has Padding\n\nOpen\n\nName: Gridicons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Mono Icons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Cuida Icons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: WeUI Icon\n\nCategory: UI 24px\n\nTags: Has Padding\n\nOpen\n\nName: Duoicons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: SVG Spinners\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Contains Animations\n\nOpen\n\nName: Huge Icons\n\nCategory: UI 24px\n\nTags: Has Padding, Uses Stroke\n\nOpen\n\nName: Lets Icons\n\nCategory: UI 24px\n\nTags: Has Padding, Uses Stroke\n\nOpen\n\nName: Ultimate free icons\n\nCategory: UI 24px\n\nTags: Uses Stroke\n\nOpen\n\nName: Plump free icons\n\nCategory: UI 24px\n\nOpen\n\nName: Sharp free icons\n\nCategory: UI 24px\n\nOpen\n\nName: Mage Icons\n\nCategory: UI 24px\n\nTags: Has Padding, Uses Stroke\n\nOpen\n\nName: Stash Icons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Lineicons\n\nCategory: UI 24px\n\nTags: Has Padding\n\nOpen\n\nName: WordPress Icons\n\nCategory: UI 24px\n\nTags: Has Padding\n\nOpen\n\nName: IconPark Outline\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: IconPark Solid\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: IconPark TwoTone\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: Jam Icons\n\nCategory: UI 24px\n\nTags: Has Padding\n\nOpen\n\nName: Cyber free icons\n\nCategory: UI 24px\n\nTags: Precise Shapes\n\nOpen\n\nName: Guidance\n\nCategory: UI 24px\n\nTags: Precise Shapes\n\nOpen\n\nName: Carbon\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: IonIcons\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Famicons\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Ant Design Icons\n\nCategory: UI 16px / 32px\n\nTags: Has Padding\n\nOpen\n\nName: Lsicon\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Gravity UI Icons\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: CoreUI Free\n\nCategory: UI 16px / 32px\n\nOpen\n\nName: @icons\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Element Plus\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Charm Icons\n\nCategory: UI 16px / 32px\n\nTags: Has Padding, Uses Stroke\n\nOpen\n\nName: Quill Icons\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: Bytesize Icons\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: Bootstrap Icons\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes\n\nOpen\n\nName: Pixel free icons\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes\n\nOpen\n\nName: Streamline Block\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes\n\nOpen\n\nName: Rivet Icons\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes\n\nOpen\n\nName: Nimbus\n\nCategory: UI 16px / 32px\n\nOpen\n\nName: FormKit Icons\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes\n\nOpen\n\nName: Fluent UI System Icons\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Phosphor\n\nCategory: UI Other / Mixed Grid\n\nTags: Has Padding\n\nOpen\n\nName: Glyphs\n\nCategory: UI Other / Mixed Grid\n\nTags: Has Padding\n\nOpen\n\nName: Glyphs Poly\n\nCategory: UI Other / Mixed Grid\n\nTags: Has Padding, Uses Stroke\n\nOpen\n\nName: Teenyicons\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes\n\nOpen\n\nName: Clarity\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Freehand free icons\n\nCategory: UI Other / Mixed Grid\n\nOpen\n\nName: Siemens Industrial Experience Icons\n\nCategory: UI Other / Mixed Grid\n\nTags: Has Padding\n\nOpen\n\nName: Octicons\n\nCategory: UI Other / Mixed Grid\n\nOpen\n\nName: Memory Icons\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: System UIcons\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Radix Icons\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Zondicons\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes\n\nOpen\n\nName: uiw icons\n\nCategory: UI Other / Mixed Grid\n\nOpen\n\nName: CodeX Icons\n\nCategory: UI Other / Mixed Grid\n\nTags: Has Padding, Uses Stroke\n\nOpen\n\nName: Evil Icons\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: HeroIcons\n\nCategory: UI Other / Mixed Grid\n\nTags: Has Padding\n\nOpen\n\nName: SidekickIcons\n\nCategory: UI Other / Mixed Grid\n\nTags: Has Padding\n\nOpen\n\nName: Pepicons Pop!\n\nCategory: UI Other / Mixed Grid\n\nOpen\n\nName: Pepicons Print\n\nCategory: UI Other / Mixed Grid\n\nOpen\n\nName: Pepicons Pencil\n\nCategory: UI Other / Mixed Grid\n\nOpen\n\nName: Framework7 Icons\n\nCategory: UI Other / Mixed Grid\n\nTags: Has Padding\n\nOpen\n\nName: Gitlab SVGs\n\nCategory: UI Other / Mixed Grid\n\nOpen\n\nName: Garden SVG Icons\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Streamline\n\nCategory: UI Other / Mixed Grid\n\nOpen\n\nName: Flex free icons\n\nCategory: UI Other / Mixed Grid\n\nOpen\n\nName: Font Awesome Solid\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes\n\nOpen\n\nName: Font Awesome Regular\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes\n\nOpen\n\nName: Pico-icon\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes\n\nOpen\n\nName: OOUI\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes\n\nOpen\n\nName: OpenSearch UI\n\nCategory: UI Other / Mixed Grid\n\nOpen\n\nName: NRK Core Icons\n\nCategory: UI Other / Mixed Grid\n\nTags: Has Padding\n\nOpen\n\nName: Dinkie Icons\n\nCategory: UI Other / Mixed Grid\n\nOpen\n\nName: Qlementine Icons\n\nCategory: UI Other / Mixed Grid\n\nOpen\n\nName: Ultimate color icons\n\nCategory: UI Multicolor\n\nOpen\n\nName: Plump color icons\n\nCategory: UI Multicolor\n\nTags: Uses Stroke\n\nOpen\n\nName: Freehand color icons\n\nCategory: UI Multicolor\n\nOpen\n\nName: Kameleon color icons\n\nCategory: UI Multicolor\n\nOpen\n\nName: Stickies color icons\n\nCategory: UI Multicolor\n\nOpen\n\nName: Fluent UI System Color Icons\n\nCategory: UI Multicolor\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Streamline color\n\nCategory: UI Multicolor\n\nOpen\n\nName: Flex color icons\n\nCategory: UI Multicolor\n\nOpen\n\nName: Sharp color icons\n\nCategory: UI Multicolor\n\nTags: Uses Stroke\n\nOpen\n\nName: Cyber color icons\n\nCategory: UI Multicolor\n\nTags: Precise Shapes\n\nOpen\n\nName: IconPark\n\nCategory: UI Multicolor\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: Marketeq\n\nCategory: UI Multicolor\n\nTags: Has Padding, Uses Stroke\n\nOpen\n\nName: VSCode Icons\n\nCategory: Programming\n\nTags: Has Padding\n\nOpen\n\nName: Codicons\n\nCategory: Programming\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Material Icon Theme\n\nCategory: Programming\n\nOpen\n\nName: File Icons\n\nCategory: Programming\n\nOpen\n\nName: Devicon\n\nCategory: Programming\n\nOpen\n\nName: Devicon Plain\n\nCategory: Programming\n\nOpen\n\nName: Catppuccin Icons\n\nCategory: Programming\n\nOpen\n\nName: Skill Icons\n\nCategory: Programming\n\nOpen\n\nName: Google Cloud Icons\n\nCategory: Programming\n\nOpen\n\nName: UnJS Logos\n\nCategory: Programming\n\nOpen\n\nName: Simple Icons\n\nCategory: Logos\n\nOpen\n\nName: SVG Logos\n\nCategory: Logos\n\nOpen\n\nName: Logos free icons\n\nCategory: Logos\n\nOpen\n\nName: CoreUI Brands\n\nCategory: Logos\n\nOpen\n\nName: Font Awesome Brands\n\nCategory: Logos\n\nOpen\n\nName: Boxicons Brands\n\nCategory: Logos\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Nonicons\n\nCategory: Logos\n\nOpen\n\nName: Arcticons\n\nCategory: Logos\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: selfh.st/icons\n\nCategory: Logos\n\nOpen\n\nName: Custom Brand Icons\n\nCategory: Logos\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Brandico\n\nCategory: Logos\n\nOpen\n\nName: Entypo+ Social\n\nCategory: Logos\n\nOpen\n\nName: Web3 Icons\n\nCategory: Logos\n\nOpen\n\nName: Web3 Icons Branded\n\nCategory: Logos\n\nOpen\n\nName: Cryptocurrency Icons\n\nCategory: Logos\n\nOpen\n\nName: Cryptocurrency Color Icons\n\nCategory: Logos\n\nOpen\n\nName: OpenMoji\n\nCategory: Emoji\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: Twitter Emoji\n\nCategory: Emoji\n\nTags: Precise Shapes\n\nOpen\n\nName: Noto Emoji\n\nCategory: Emoji\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Fluent Emoji Flat\n\nCategory: Emoji\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Fluent Emoji High Contrast\n\nCategory: Emoji\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Noto Emoji (v1)\n\nCategory: Emoji\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Emoji One (Colored)\n\nCategory: Emoji\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Emoji One (Monotone)\n\nCategory: Emoji\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Emoji One (v1)\n\nCategory: Emoji\n\nOpen\n\nName: Firefox OS Emoji\n\nCategory: Emoji\n\nOpen\n\nName: Streamline Emojis\n\nCategory: Emoji\n\nOpen\n\nName: Circle Flags\n\nCategory: Flags / Maps\n\nOpen\n\nName: Flag Icons\n\nCategory: Flags / Maps\n\nTags: Uses Stroke\n\nOpen\n\nName: Flagpack\n\nCategory: Flags / Maps\n\nOpen\n\nName: CoreUI Flags\n\nCategory: Flags / Maps\n\nOpen\n\nName: Pinhead Map Icons\n\nCategory: Flags / Maps\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Röntgen\n\nCategory: Flags / Maps\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Maki\n\nCategory: Flags / Maps\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Temaki\n\nCategory: Flags / Maps\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Font-GIS\n\nCategory: Flags / Maps\n\nOpen\n\nName: Map Icons\n\nCategory: Flags / Maps\n\nTags: Precise Shapes\n\nOpen\n\nName: GeoGlyphs\n\nCategory: Flags / Maps\n\nTags: Has Padding\n\nOpen\n\nName: OSM Icons\n\nCategory: Flags / Maps\n\nOpen\n\nName: Game Icons\n\nCategory: Thematic\n\nTags: Has Padding\n\nOpen\n\nName: FontAudio\n\nCategory: Thematic\n\nTags: Has Padding\n\nOpen\n\nName: Academicons\n\nCategory: Thematic\n\nOpen\n\nName: Weather Icons\n\nCategory: Thematic\n\nTags: Has Padding\n\nOpen\n\nName: Meteocons\n\nCategory: Thematic\n\nTags: Uses Stroke, Contains Animations\n\nOpen\n\nName: Health Icons\n\nCategory: Thematic\n\nTags: Precise Shapes\n\nOpen\n\nName: Medical Icons\n\nCategory: Thematic\n\nOpen\n\nName: Covid Icons\n\nCategory: Thematic\n\nTags: Uses Stroke\n\nOpen\n\nName: Ginetex Care Symbols\n\nCategory: Thematic\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Line Awesome\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Eva Icons\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Dashicons\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Flat Color Icons\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Entypo+\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes\n\nOpen\n\nName: Foundation\n\nCategory: Archive / Unmaintained\n\nTags: Has Padding\n\nOpen\n\nName: Raphael\n\nCategory: Archive / Unmaintained\n\nTags: Has Padding\n\nOpen\n\nName: Icons8 Windows 10 Icons\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Innowatio Font\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Gala Icons\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: HeroIcons v1 Outline\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: HeroIcons v1 Solid\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: BoxIcons v2\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: BoxIcons v2 Solid\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Font Awesome 6 Solid\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes\n\nOpen\n\nName: Font Awesome 6 Regular\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes\n\nOpen\n\nName: Font Awesome 6 Brands\n\nCategory: Archive / Unmaintained\n\nOpen\n\nName: Font Awesome 5 Solid\n\nCategory: Archive / Unmaintained\n\nOpen\n\nName: Font Awesome 5 Regular\n\nCategory: Archive / Unmaintained\n\nOpen\n\nName: Font Awesome 5 Brands\n\nCategory: Archive / Unmaintained\n\nOpen\n\nName: Font Awesome 4\n\nCategory: Archive / Unmaintained\n\nOpen\n\nName: Fluent UI MDL2\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes\n\nOpen\n\nName: Fontisto\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes\n\nOpen\n\nName: IcoMoon Free\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes\n\nOpen\n\nName: Subway Icon Set\n\nCategory: Archive / Unmaintained\n\nOpen\n\nName: Open Iconic\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes\n\nOpen\n\nName: Icons8 Windows 8 Icons\n\nCategory: Archive / Unmaintained\n\nOpen\n\nName: Simple line icons\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes\n\nOpen\n\nName: Elegant\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes\n\nOpen\n\nName: Elusive Icons\n\nCategory: Archive / Unmaintained\n\nOpen\n\nName: Vaadin Icons\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes\n\nOpen\n\nName: Grommet Icons\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes, Uses Stroke\n\nOpen\n\nName: WebHostingHub Glyphs\n\nOpen\n\nName: SmartIcons Glyph\n\nOpen\n\nName: Material Design Iconic Font\n\nOpen\n\nName: Ligature Symbols\n\nOpen\n\nName: BPMN\n\nTags: Has Padding\n\nOpen\n\nName: Flat UI Icons\n\nOpen\n\nName: Vesper Icons\n\nOpen\n\nName: TopCoat Icons\n\nOpen\n\nName: Icalicons\n\nOpen\n\nName: Web Symbols Liga\n\nOpen\n\nName: Fontelico\n\nOpen\n\nName: PrestaShop Icons\n\nOpen\n\nName: Feather Icons\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: Mono Icons\n\nOpen\n\nName: Pepicons\n\nOpen\n\nName: Fluent Emoji\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen']</msg>
+<arg>.collections-list</arg>
+<arg>contains</arg>
+<arg>Category:</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-07-15T11:48:27.756801" elapsed="0.044002"/>
+</kw>
+<kw name="Get Text" owner="Browser">
+<msg time="2026-07-15T11:48:27.845333" level="INFO">Text: ['Name: Material Symbols\n\nCategory: Material\n\nTags: Has Padding\n\nOpen\n\nName: Material Symbols Light\n\nCategory: Material\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Google Material Icons\n\nCategory: Material\n\nOpen\n\nName: Material Design Icons\n\nCategory: Material\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Material Design Light\n\nCategory: Material\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Material Line Icons\n\nCategory: Material\n\nTags: Precise Shapes, Has Padding, Uses Stroke, Contains Animations\n\nOpen\n\nName: Solar\n\nCategory: UI 24px\n\nTags: Has Padding, Uses Stroke\n\nOpen\n\nName: Tabler Icons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: Boxicons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: MingCute Icon\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Remix Icon\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Myna UI Icons\n\nCategory: UI 24px\n\nTags: Has Padding, Uses Stroke\n\nOpen\n\nName: IconaMoon\n\nCategory: UI 24px\n\nTags: Has Padding, Uses Stroke\n\nOpen\n\nName: Iconoir\n\nCategory: UI 24px\n\nTags: Has Padding, Uses Stroke\n\nOpen\n\nName: Lucide\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: Lucide Lab\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: Unicons\n\nCategory: UI 24px\n\nTags: Has Padding\n\nOpen\n\nName: TDesign Icons\n\nCategory: UI 24px\n\nTags: Uses Stroke\n\nOpen\n\nName: Sargam Icons\n\nCategory: UI 24px\n\nTags: Has Padding, Uses Stroke\n\nOpen\n\nName: Majesticons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: css.gg\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Flowbite Icons\n\nCategory: UI 24px\n\nTags: Uses Stroke\n\nOpen\n\nName: Basil\n\nCategory: UI 24px\n\nTags: Has Padding\n\nOpen\n\nName: Pixelarticons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Pixel Icon\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Akar Icons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: coolicons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: ProIcons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: Typicons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Meteor Icons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: Prime Icons\n\nCategory: UI 24px\n\nTags: Has Padding\n\nOpen\n\nName: Circum Icons\n\nCategory: UI 24px\n\nTags: Has Padding\n\nOpen\n\nName: Feather Icon\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: EOS Icons\n\nCategory: UI 24px\n\nOpen\n\nName: Bitcoin Icons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Humbleicons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: Unicons Monochrome\n\nCategory: UI 24px\n\nTags: Has Padding\n\nOpen\n\nName: Unicons Thin Line\n\nCategory: UI 24px\n\nTags: Has Padding\n\nOpen\n\nName: Unicons Solid\n\nCategory: UI 24px\n\nTags: Has Padding\n\nOpen\n\nName: Gridicons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Mono Icons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Cuida Icons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: WeUI Icon\n\nCategory: UI 24px\n\nTags: Has Padding\n\nOpen\n\nName: Duoicons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: SVG Spinners\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Contains Animations\n\nOpen\n\nName: Huge Icons\n\nCategory: UI 24px\n\nTags: Has Padding, Uses Stroke\n\nOpen\n\nName: Lets Icons\n\nCategory: UI 24px\n\nTags: Has Padding, Uses Stroke\n\nOpen\n\nName: Ultimate free icons\n\nCategory: UI 24px\n\nTags: Uses Stroke\n\nOpen\n\nName: Plump free icons\n\nCategory: UI 24px\n\nOpen\n\nName: Sharp free icons\n\nCategory: UI 24px\n\nOpen\n\nName: Mage Icons\n\nCategory: UI 24px\n\nTags: Has Padding, Uses Stroke\n\nOpen\n\nName: Stash Icons\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Lineicons\n\nCategory: UI 24px\n\nTags: Has Padding\n\nOpen\n\nName: WordPress Icons\n\nCategory: UI 24px\n\nTags: Has Padding\n\nOpen\n\nName: IconPark Outline\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: IconPark Solid\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: IconPark TwoTone\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: Jam Icons\n\nCategory: UI 24px\n\nTags: Has Padding\n\nOpen\n\nName: Cyber free icons\n\nCategory: UI 24px\n\nTags: Precise Shapes\n\nOpen\n\nName: Guidance\n\nCategory: UI 24px\n\nTags: Precise Shapes\n\nOpen\n\nName: Carbon\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: IonIcons\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Famicons\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Ant Design Icons\n\nCategory: UI 16px / 32px\n\nTags: Has Padding\n\nOpen\n\nName: Lsicon\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Gravity UI Icons\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: CoreUI Free\n\nCategory: UI 16px / 32px\n\nOpen\n\nName: @icons\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Element Plus\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Charm Icons\n\nCategory: UI 16px / 32px\n\nTags: Has Padding, Uses Stroke\n\nOpen\n\nName: Quill Icons\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: Bytesize Icons\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: Bootstrap Icons\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes\n\nOpen\n\nName: Pixel free icons\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes\n\nOpen\n\nName: Streamline Block\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes\n\nOpen\n\nName: Rivet Icons\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes\n\nOpen\n\nName: Nimbus\n\nCategory: UI 16px / 32px\n\nOpen\n\nName: FormKit Icons\n\nCategory: UI 16px / 32px\n\nTags: Precise Shapes\n\nOpen\n\nName: Fluent UI System Icons\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Phosphor\n\nCategory: UI Other / Mixed Grid\n\nTags: Has Padding\n\nOpen\n\nName: Glyphs\n\nCategory: UI Other / Mixed Grid\n\nTags: Has Padding\n\nOpen\n\nName: Glyphs Poly\n\nCategory: UI Other / Mixed Grid\n\nTags: Has Padding, Uses Stroke\n\nOpen\n\nName: Teenyicons\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes\n\nOpen\n\nName: Clarity\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Freehand free icons\n\nCategory: UI Other / Mixed Grid\n\nOpen\n\nName: Siemens Industrial Experience Icons\n\nCategory: UI Other / Mixed Grid\n\nTags: Has Padding\n\nOpen\n\nName: Octicons\n\nCategory: UI Other / Mixed Grid\n\nOpen\n\nName: Memory Icons\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: System UIcons\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Radix Icons\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Zondicons\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes\n\nOpen\n\nName: uiw icons\n\nCategory: UI Other / Mixed Grid\n\nOpen\n\nName: CodeX Icons\n\nCategory: UI Other / Mixed Grid\n\nTags: Has Padding, Uses Stroke\n\nOpen\n\nName: Evil Icons\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: HeroIcons\n\nCategory: UI Other / Mixed Grid\n\nTags: Has Padding\n\nOpen\n\nName: SidekickIcons\n\nCategory: UI Other / Mixed Grid\n\nTags: Has Padding\n\nOpen\n\nName: Pepicons Pop!\n\nCategory: UI Other / Mixed Grid\n\nOpen\n\nName: Pepicons Print\n\nCategory: UI Other / Mixed Grid\n\nOpen\n\nName: Pepicons Pencil\n\nCategory: UI Other / Mixed Grid\n\nOpen\n\nName: Framework7 Icons\n\nCategory: UI Other / Mixed Grid\n\nTags: Has Padding\n\nOpen\n\nName: Gitlab SVGs\n\nCategory: UI Other / Mixed Grid\n\nOpen\n\nName: Garden SVG Icons\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Streamline\n\nCategory: UI Other / Mixed Grid\n\nOpen\n\nName: Flex free icons\n\nCategory: UI Other / Mixed Grid\n\nOpen\n\nName: Font Awesome Solid\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes\n\nOpen\n\nName: Font Awesome Regular\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes\n\nOpen\n\nName: Pico-icon\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes\n\nOpen\n\nName: OOUI\n\nCategory: UI Other / Mixed Grid\n\nTags: Precise Shapes\n\nOpen\n\nName: OpenSearch UI\n\nCategory: UI Other / Mixed Grid\n\nOpen\n\nName: NRK Core Icons\n\nCategory: UI Other / Mixed Grid\n\nTags: Has Padding\n\nOpen\n\nName: Dinkie Icons\n\nCategory: UI Other / Mixed Grid\n\nOpen\n\nName: Qlementine Icons\n\nCategory: UI Other / Mixed Grid\n\nOpen\n\nName: Ultimate color icons\n\nCategory: UI Multicolor\n\nOpen\n\nName: Plump color icons\n\nCategory: UI Multicolor\n\nTags: Uses Stroke\n\nOpen\n\nName: Freehand color icons\n\nCategory: UI Multicolor\n\nOpen\n\nName: Kameleon color icons\n\nCategory: UI Multicolor\n\nOpen\n\nName: Stickies color icons\n\nCategory: UI Multicolor\n\nOpen\n\nName: Fluent UI System Color Icons\n\nCategory: UI Multicolor\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Streamline color\n\nCategory: UI Multicolor\n\nOpen\n\nName: Flex color icons\n\nCategory: UI Multicolor\n\nOpen\n\nName: Sharp color icons\n\nCategory: UI Multicolor\n\nTags: Uses Stroke\n\nOpen\n\nName: Cyber color icons\n\nCategory: UI Multicolor\n\nTags: Precise Shapes\n\nOpen\n\nName: IconPark\n\nCategory: UI Multicolor\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: Marketeq\n\nCategory: UI Multicolor\n\nTags: Has Padding, Uses Stroke\n\nOpen\n\nName: VSCode Icons\n\nCategory: Programming\n\nTags: Has Padding\n\nOpen\n\nName: Codicons\n\nCategory: Programming\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Material Icon Theme\n\nCategory: Programming\n\nOpen\n\nName: File Icons\n\nCategory: Programming\n\nOpen\n\nName: Devicon\n\nCategory: Programming\n\nOpen\n\nName: Devicon Plain\n\nCategory: Programming\n\nOpen\n\nName: Catppuccin Icons\n\nCategory: Programming\n\nOpen\n\nName: Skill Icons\n\nCategory: Programming\n\nOpen\n\nName: Google Cloud Icons\n\nCategory: Programming\n\nOpen\n\nName: UnJS Logos\n\nCategory: Programming\n\nOpen\n\nName: Simple Icons\n\nCategory: Logos\n\nOpen\n\nName: SVG Logos\n\nCategory: Logos\n\nOpen\n\nName: Logos free icons\n\nCategory: Logos\n\nOpen\n\nName: CoreUI Brands\n\nCategory: Logos\n\nOpen\n\nName: Font Awesome Brands\n\nCategory: Logos\n\nOpen\n\nName: Boxicons Brands\n\nCategory: Logos\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Nonicons\n\nCategory: Logos\n\nOpen\n\nName: Arcticons\n\nCategory: Logos\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: selfh.st/icons\n\nCategory: Logos\n\nOpen\n\nName: Custom Brand Icons\n\nCategory: Logos\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Brandico\n\nCategory: Logos\n\nOpen\n\nName: Entypo+ Social\n\nCategory: Logos\n\nOpen\n\nName: Web3 Icons\n\nCategory: Logos\n\nOpen\n\nName: Web3 Icons Branded\n\nCategory: Logos\n\nOpen\n\nName: Cryptocurrency Icons\n\nCategory: Logos\n\nOpen\n\nName: Cryptocurrency Color Icons\n\nCategory: Logos\n\nOpen\n\nName: OpenMoji\n\nCategory: Emoji\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: Twitter Emoji\n\nCategory: Emoji\n\nTags: Precise Shapes\n\nOpen\n\nName: Noto Emoji\n\nCategory: Emoji\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Fluent Emoji Flat\n\nCategory: Emoji\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Fluent Emoji High Contrast\n\nCategory: Emoji\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Noto Emoji (v1)\n\nCategory: Emoji\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Emoji One (Colored)\n\nCategory: Emoji\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Emoji One (Monotone)\n\nCategory: Emoji\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Emoji One (v1)\n\nCategory: Emoji\n\nOpen\n\nName: Firefox OS Emoji\n\nCategory: Emoji\n\nOpen\n\nName: Streamline Emojis\n\nCategory: Emoji\n\nOpen\n\nName: Circle Flags\n\nCategory: Flags / Maps\n\nOpen\n\nName: Flag Icons\n\nCategory: Flags / Maps\n\nTags: Uses Stroke\n\nOpen\n\nName: Flagpack\n\nCategory: Flags / Maps\n\nOpen\n\nName: CoreUI Flags\n\nCategory: Flags / Maps\n\nOpen\n\nName: Pinhead Map Icons\n\nCategory: Flags / Maps\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Röntgen\n\nCategory: Flags / Maps\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Maki\n\nCategory: Flags / Maps\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Temaki\n\nCategory: Flags / Maps\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Font-GIS\n\nCategory: Flags / Maps\n\nOpen\n\nName: Map Icons\n\nCategory: Flags / Maps\n\nTags: Precise Shapes\n\nOpen\n\nName: GeoGlyphs\n\nCategory: Flags / Maps\n\nTags: Has Padding\n\nOpen\n\nName: OSM Icons\n\nCategory: Flags / Maps\n\nOpen\n\nName: Game Icons\n\nCategory: Thematic\n\nTags: Has Padding\n\nOpen\n\nName: FontAudio\n\nCategory: Thematic\n\nTags: Has Padding\n\nOpen\n\nName: Academicons\n\nCategory: Thematic\n\nOpen\n\nName: Weather Icons\n\nCategory: Thematic\n\nTags: Has Padding\n\nOpen\n\nName: Meteocons\n\nCategory: Thematic\n\nTags: Uses Stroke, Contains Animations\n\nOpen\n\nName: Health Icons\n\nCategory: Thematic\n\nTags: Precise Shapes\n\nOpen\n\nName: Medical Icons\n\nCategory: Thematic\n\nOpen\n\nName: Covid Icons\n\nCategory: Thematic\n\nTags: Uses Stroke\n\nOpen\n\nName: Ginetex Care Symbols\n\nCategory: Thematic\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Line Awesome\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Eva Icons\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Dashicons\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Flat Color Icons\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Entypo+\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes\n\nOpen\n\nName: Foundation\n\nCategory: Archive / Unmaintained\n\nTags: Has Padding\n\nOpen\n\nName: Raphael\n\nCategory: Archive / Unmaintained\n\nTags: Has Padding\n\nOpen\n\nName: Icons8 Windows 10 Icons\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Innowatio Font\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Gala Icons\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: HeroIcons v1 Outline\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: HeroIcons v1 Solid\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: BoxIcons v2\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: BoxIcons v2 Solid\n\nCategory: UI 24px\n\nTags: Precise Shapes, Has Padding\n\nOpen\n\nName: Font Awesome 6 Solid\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes\n\nOpen\n\nName: Font Awesome 6 Regular\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes\n\nOpen\n\nName: Font Awesome 6 Brands\n\nCategory: Archive / Unmaintained\n\nOpen\n\nName: Font Awesome 5 Solid\n\nCategory: Archive / Unmaintained\n\nOpen\n\nName: Font Awesome 5 Regular\n\nCategory: Archive / Unmaintained\n\nOpen\n\nName: Font Awesome 5 Brands\n\nCategory: Archive / Unmaintained\n\nOpen\n\nName: Font Awesome 4\n\nCategory: Archive / Unmaintained\n\nOpen\n\nName: Fluent UI MDL2\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes\n\nOpen\n\nName: Fontisto\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes\n\nOpen\n\nName: IcoMoon Free\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes\n\nOpen\n\nName: Subway Icon Set\n\nCategory: Archive / Unmaintained\n\nOpen\n\nName: Open Iconic\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes\n\nOpen\n\nName: Icons8 Windows 8 Icons\n\nCategory: Archive / Unmaintained\n\nOpen\n\nName: Simple line icons\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes\n\nOpen\n\nName: Elegant\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes\n\nOpen\n\nName: Elusive Icons\n\nCategory: Archive / Unmaintained\n\nOpen\n\nName: Vaadin Icons\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes\n\nOpen\n\nName: Grommet Icons\n\nCategory: Archive / Unmaintained\n\nTags: Precise Shapes, Uses Stroke\n\nOpen\n\nName: WebHostingHub Glyphs\n\nOpen\n\nName: SmartIcons Glyph\n\nOpen\n\nName: Material Design Iconic Font\n\nOpen\n\nName: Ligature Symbols\n\nOpen\n\nName: BPMN\n\nTags: Has Padding\n\nOpen\n\nName: Flat UI Icons\n\nOpen\n\nName: Vesper Icons\n\nOpen\n\nName: TopCoat Icons\n\nOpen\n\nName: Icalicons\n\nOpen\n\nName: Web Symbols Liga\n\nOpen\n\nName: Fontelico\n\nOpen\n\nName: PrestaShop Icons\n\nOpen\n\nName: Feather Icons\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen\n\nName: Mono Icons\n\nOpen\n\nName: Pepicons\n\nOpen\n\nName: Fluent Emoji\n\nTags: Precise Shapes, Has Padding, Uses Stroke\n\nOpen']</msg>
+<arg>.collections-list</arg>
+<arg>contains</arg>
+<arg>Tags:</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-07-15T11:48:27.800803" elapsed="0.045616"/>
+</kw>
+<kw name="Close Browser" owner="Browser" type="TEARDOWN">
+<msg time="2026-07-15T11:48:28.266826" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-07-15T11:48:27.846419" elapsed="0.421406"/>
+</kw>
+<doc>Among all loaded collections at least one must show a
+"Category:" label and at least one a "Tags:" label.</doc>
+<status status="PASS" start="2026-07-15T11:48:23.453853" elapsed="4.813972"/>
+</test>
+<test id="s1-s2-t3" name="Open Button Is Present For Each Collection" line="34">
+<kw name="Open Iconify Navigator" owner="app" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-07-15T11:48:28.288841" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Users\\saint\\progetti\\IconifyNavigator\\robot\\results\\angular\\browser\\traces\\temp\\94e9db6e-136c-491a-a1a9-9002afdc7d75"}</msg>
+<msg time="2026-07-15T11:48:29.112457" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Users\\saint\\progetti\\IconifyNavigator\\robot\\results\\angular\\browser\\traces\\temp\\94e9db6e-136c-491a-a1a9-9002afdc7d75"}</msg>
+<arg>${BROWSER_TYPE}</arg>
+<arg>headless=${HEADLESS}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2026-07-15T11:48:28.286839" elapsed="0.825618"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2026-07-15T11:48:30.253811" level="INFO">Successfully initialized new page object and opened url: http://localhost:4200</msg>
+<msg time="2026-07-15T11:48:30.253811" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<arg>${APP_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2026-07-15T11:48:29.112457" elapsed="1.141354"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-07-15T11:48:30.305663" level="INFO">Waited for Element with selector h1 at state visible</msg>
+<arg>h1</arg>
+<arg>visible</arg>
+<arg>timeout=10s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-07-15T11:48:30.254811" elapsed="0.051856"/>
+</kw>
+<doc>Opens a fresh browser window and navigates to the app.
+Waits until the main heading is visible before returning.</doc>
+<status status="PASS" start="2026-07-15T11:48:28.285840" elapsed="2.020827"/>
+</kw>
+<kw name="Collections Are Loaded" owner="app">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-07-15T11:48:32.757267" level="INFO">Waited for Element with selector .collection-card &gt;&gt; nth=0 at state visible</msg>
+<arg>.collection-card &gt;&gt; nth=0</arg>
+<arg>visible</arg>
+<arg>timeout=${COLLECTIONS_TIMEOUT}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-07-15T11:48:30.308891" elapsed="2.448376"/>
+</kw>
+<doc>Blocks until at least one collection card is visible,
+meaning the /collections API call has completed.
+Uses &gt;&gt; nth=0 to target the first card and avoid strict-mode
+violations (the API returns 200+ collections).</doc>
+<status status="PASS" start="2026-07-15T11:48:30.306667" elapsed="2.450600"/>
+</kw>
+<kw name="Get Element Count" owner="Browser">
+<msg time="2026-07-15T11:48:32.796337" level="INFO">${buttons} = 230</msg>
+<var>${buttons}</var>
+<arg>.open-button</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<status status="PASS" start="2026-07-15T11:48:32.758268" elapsed="0.038069"/>
+</kw>
+<kw name="Get Element Count" owner="Browser">
+<msg time="2026-07-15T11:48:32.807336" level="INFO">${cards} = 230</msg>
+<var>${cards}</var>
+<arg>.collection-card</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<status status="PASS" start="2026-07-15T11:48:32.796337" elapsed="0.010999"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<arg>${buttons}</arg>
+<arg>${cards}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-07-15T11:48:32.808335" elapsed="0.001004"/>
+</kw>
+<kw name="Close Browser" owner="Browser" type="TEARDOWN">
+<msg time="2026-07-15T11:48:33.346358" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-07-15T11:48:32.809339" elapsed="0.537019"/>
+</kw>
+<doc>Every collection card must contain an "Open" button;
+the button count must equal the card count.</doc>
+<status status="PASS" start="2026-07-15T11:48:28.278827" elapsed="5.067531"/>
+</test>
+<test id="s1-s2-t4" name="Collection Cards Show Preview Icons" line="42">
+<kw name="Open Iconify Navigator" owner="app" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-07-15T11:48:33.365361" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Users\\saint\\progetti\\IconifyNavigator\\robot\\results\\angular\\browser\\traces\\temp\\62ccb3cc-9cef-40d8-940d-6d30f30f5e0e"}</msg>
+<msg time="2026-07-15T11:48:34.056858" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Users\\saint\\progetti\\IconifyNavigator\\robot\\results\\angular\\browser\\traces\\temp\\62ccb3cc-9cef-40d8-940d-6d30f30f5e0e"}</msg>
+<arg>${BROWSER_TYPE}</arg>
+<arg>headless=${HEADLESS}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2026-07-15T11:48:33.364359" elapsed="0.692499"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2026-07-15T11:48:35.026668" level="INFO">Successfully initialized new page object and opened url: http://localhost:4200</msg>
+<msg time="2026-07-15T11:48:35.026668" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<arg>${APP_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2026-07-15T11:48:34.057860" elapsed="0.968808"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-07-15T11:48:35.074918" level="INFO">Waited for Element with selector h1 at state visible</msg>
+<arg>h1</arg>
+<arg>visible</arg>
+<arg>timeout=10s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-07-15T11:48:35.027671" elapsed="0.047247"/>
+</kw>
+<doc>Opens a fresh browser window and navigates to the app.
+Waits until the main heading is visible before returning.</doc>
+<status status="PASS" start="2026-07-15T11:48:33.363360" elapsed="1.711558"/>
+</kw>
+<kw name="Collections Are Loaded" owner="app">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-07-15T11:48:37.479415" level="INFO">Waited for Element with selector .collection-card &gt;&gt; nth=0 at state visible</msg>
+<arg>.collection-card &gt;&gt; nth=0</arg>
+<arg>visible</arg>
+<arg>timeout=${COLLECTIONS_TIMEOUT}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-07-15T11:48:35.075923" elapsed="2.403492"/>
+</kw>
+<doc>Blocks until at least one collection card is visible,
+meaning the /collections API call has completed.
+Uses &gt;&gt; nth=0 to target the first card and avoid strict-mode
+violations (the API returns 200+ collections).</doc>
+<status status="PASS" start="2026-07-15T11:48:35.075923" elapsed="2.404491"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-07-15T11:48:37.634275" level="INFO">Waited for Element with selector .collection-preview-img &gt;&gt; nth=0 at state visible</msg>
+<arg>.collection-preview-img &gt;&gt; nth=0</arg>
+<arg>visible</arg>
+<arg>timeout=${PREVIEW_TIMEOUT}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-07-15T11:48:37.481415" elapsed="0.153877"/>
+</kw>
+<kw name="Wait For Image To Load" owner="app">
+<kw name="Wait Until Keyword Succeeds" owner="BuiltIn">
+<kw name="Image Should Be Loaded" owner="app">
+<kw name="Evaluate JavaScript" owner="Browser">
+<msg time="2026-07-15T11:48:37.723504" level="INFO">JavaScript executed successfully.</msg>
+<msg time="2026-07-15T11:48:37.724505" level="INFO">${nw} = 16</msg>
+<var>${nw}</var>
+<arg>${selector}</arg>
+<arg>el =&gt; el.naturalWidth</arg>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Executes given javascript on the selected element(s) or on page.</doc>
+<status status="PASS" start="2026-07-15T11:48:37.638614" elapsed="0.085891"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${nw} &gt; 0</arg>
+<arg>Image not yet loaded or broken: ${selector}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-07-15T11:48:37.724505" elapsed="0.002009"/>
+</kw>
+<arg>${selector}</arg>
+<doc>Single-attempt helper for Wait For Image To Load.
+Fails immediately if the image has not finished loading.</doc>
+<status status="PASS" start="2026-07-15T11:48:37.637410" elapsed="0.089104"/>
+</kw>
+<arg>${timeout}</arg>
+<arg>500ms</arg>
+<arg>Image Should Be Loaded</arg>
+<arg>${selector}</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="PASS" start="2026-07-15T11:48:37.636399" elapsed="0.090115"/>
+</kw>
+<arg>.collection-preview-img &gt;&gt; nth=0</arg>
+<doc>Polls an img element until naturalWidth &gt; 0, which confirms
+the browser has fully fetched and decoded the image file.
+naturalWidth stays 0 for broken or not-yet-loaded images.</doc>
+<status status="PASS" start="2026-07-15T11:48:37.635292" elapsed="0.091222"/>
+</kw>
+<kw name="Get Element Count" owner="Browser">
+<arg>.collection-preview-img</arg>
+<arg>&gt;</arg>
+<arg>0</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<status status="PASS" start="2026-07-15T11:48:37.726514" elapsed="0.013005"/>
+</kw>
+<kw name="Close Browser" owner="Browser" type="TEARDOWN">
+<msg time="2026-07-15T11:48:38.370930" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-07-15T11:48:37.741029" elapsed="0.629901"/>
+</kw>
+<doc>After the collections list loads, each card must show a
+preview grid of up to 8 icons (class collection-preview-img,
+48×48 px). The IntersectionObserver fires for visible cards
+so at least one preview image must have loaded.</doc>
+<status status="PASS" start="2026-07-15T11:48:33.356359" elapsed="5.014571"/>
+</test>
+<test id="s1-s2-t5" name="Opening A Collection Displays Icon Images" line="52">
+<kw name="Open Iconify Navigator" owner="app" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-07-15T11:48:38.391992" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Users\\saint\\progetti\\IconifyNavigator\\robot\\results\\angular\\browser\\traces\\temp\\7cfa5f23-66ee-4486-9eb5-7d6a2557b156"}</msg>
+<msg time="2026-07-15T11:48:39.063446" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Users\\saint\\progetti\\IconifyNavigator\\robot\\results\\angular\\browser\\traces\\temp\\7cfa5f23-66ee-4486-9eb5-7d6a2557b156"}</msg>
+<arg>${BROWSER_TYPE}</arg>
+<arg>headless=${HEADLESS}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2026-07-15T11:48:38.390935" elapsed="0.673512"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2026-07-15T11:48:40.012968" level="INFO">Successfully initialized new page object and opened url: http://localhost:4200</msg>
+<msg time="2026-07-15T11:48:40.013982" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<arg>${APP_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2026-07-15T11:48:39.064447" elapsed="0.949535"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-07-15T11:48:40.062532" level="INFO">Waited for Element with selector h1 at state visible</msg>
+<arg>h1</arg>
+<arg>visible</arg>
+<arg>timeout=10s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-07-15T11:48:40.013982" elapsed="0.048550"/>
+</kw>
+<doc>Opens a fresh browser window and navigates to the app.
+Waits until the main heading is visible before returning.</doc>
+<status status="PASS" start="2026-07-15T11:48:38.389929" elapsed="1.672603"/>
+</kw>
+<kw name="Collections Are Loaded" owner="app">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-07-15T11:48:42.449300" level="INFO">Waited for Element with selector .collection-card &gt;&gt; nth=0 at state visible</msg>
+<arg>.collection-card &gt;&gt; nth=0</arg>
+<arg>visible</arg>
+<arg>timeout=${COLLECTIONS_TIMEOUT}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-07-15T11:48:40.064530" elapsed="2.385766"/>
+</kw>
+<doc>Blocks until at least one collection card is visible,
+meaning the /collections API call has completed.
+Uses &gt;&gt; nth=0 to target the first card and avoid strict-mode
+violations (the API returns 200+ collections).</doc>
+<status status="PASS" start="2026-07-15T11:48:40.063530" elapsed="2.386766"/>
+</kw>
+<kw name="Open First Collection" owner="app">
+<kw name="Click" owner="Browser">
+<msg time="2026-07-15T11:48:42.453294" level="INFO">Clicks the element '.open-button &gt;&gt; nth=0'.</msg>
+<arg>.open-button &gt;&gt; nth=0</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-07-15T11:48:42.452296" elapsed="0.360527"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-07-15T11:48:42.828846" level="INFO">Waited for Element with selector .icon-img &gt;&gt; nth=0 at state visible</msg>
+<arg>.icon-img &gt;&gt; nth=0</arg>
+<arg>visible</arg>
+<arg>timeout=${ICONS_TIMEOUT}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-07-15T11:48:42.812823" elapsed="0.016023"/>
+</kw>
+<doc>Clicks the first "Open" button and waits until at least one
+full-size icon image is rendered in the right panel.
+Uses &gt;&gt; nth=0 to avoid strict-mode violations.</doc>
+<status status="PASS" start="2026-07-15T11:48:42.450296" elapsed="0.378550"/>
+</kw>
+<kw name="Get Element Count" owner="Browser">
+<arg>.right-panel .icon-img</arg>
+<arg>&gt;</arg>
+<arg>0</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<status status="PASS" start="2026-07-15T11:48:42.829839" elapsed="0.017523"/>
+</kw>
+<kw name="Wait For Image To Load" owner="app">
+<kw name="Wait Until Keyword Succeeds" owner="BuiltIn">
+<kw name="Image Should Be Loaded" owner="app">
+<kw name="Evaluate JavaScript" owner="Browser">
+<msg time="2026-07-15T11:48:42.901861" level="INFO">JavaScript executed successfully.</msg>
+<msg time="2026-07-15T11:48:42.902859" level="INFO">${nw} = 16</msg>
+<var>${nw}</var>
+<arg>${selector}</arg>
+<arg>el =&gt; el.naturalWidth</arg>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Executes given javascript on the selected element(s) or on page.</doc>
+<status status="PASS" start="2026-07-15T11:48:42.851364" elapsed="0.051495"/>
+</kw>
+<kw name="Should Be True" owner="BuiltIn">
+<arg>${nw} &gt; 0</arg>
+<arg>Image not yet loaded or broken: ${selector}</arg>
+<doc>Fails if the given condition is not true.</doc>
+<status status="PASS" start="2026-07-15T11:48:42.902859" elapsed="0.002000"/>
+</kw>
+<arg>${selector}</arg>
+<doc>Single-attempt helper for Wait For Image To Load.
+Fails immediately if the image has not finished loading.</doc>
+<status status="PASS" start="2026-07-15T11:48:42.850364" elapsed="0.054495"/>
+</kw>
+<arg>${timeout}</arg>
+<arg>500ms</arg>
+<arg>Image Should Be Loaded</arg>
+<arg>${selector}</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="PASS" start="2026-07-15T11:48:42.849365" elapsed="0.055494"/>
+</kw>
+<arg>.icon-img &gt;&gt; nth=0</arg>
+<doc>Polls an img element until naturalWidth &gt; 0, which confirms
+the browser has fully fetched and decoded the image file.
+naturalWidth stays 0 for broken or not-yet-loaded images.</doc>
+<status status="PASS" start="2026-07-15T11:48:42.848365" elapsed="0.057502"/>
+</kw>
+<kw name="Close Browser" owner="Browser" type="TEARDOWN">
+<msg time="2026-07-15T11:48:43.543573" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-07-15T11:48:42.905867" elapsed="0.637706"/>
+</kw>
+<doc>After clicking "Open" the right panel must show icon images
+(class icon-img). At least one must have loaded (naturalWidth &gt; 0).</doc>
+<status status="PASS" start="2026-07-15T11:48:38.379928" elapsed="5.164645"/>
+</test>
+<test id="s1-s2-t6" name="Opened Collection Section Heading Contains Collection Name" line="60">
+<kw name="Open Iconify Navigator" owner="app" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-07-15T11:48:43.567096" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Users\\saint\\progetti\\IconifyNavigator\\robot\\results\\angular\\browser\\traces\\temp\\8e05a281-6278-4463-bc9d-95191748182b"}</msg>
+<msg time="2026-07-15T11:48:44.384499" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Users\\saint\\progetti\\IconifyNavigator\\robot\\results\\angular\\browser\\traces\\temp\\8e05a281-6278-4463-bc9d-95191748182b"}</msg>
+<arg>${BROWSER_TYPE}</arg>
+<arg>headless=${HEADLESS}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2026-07-15T11:48:43.565097" elapsed="0.819402"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2026-07-15T11:48:45.415178" level="INFO">Successfully initialized new page object and opened url: http://localhost:4200</msg>
+<msg time="2026-07-15T11:48:45.416190" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<arg>${APP_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2026-07-15T11:48:44.385498" elapsed="1.030692"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-07-15T11:48:45.465712" level="INFO">Waited for Element with selector h1 at state visible</msg>
+<arg>h1</arg>
+<arg>visible</arg>
+<arg>timeout=10s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-07-15T11:48:45.417180" elapsed="0.049532"/>
+</kw>
+<doc>Opens a fresh browser window and navigates to the app.
+Waits until the main heading is visible before returning.</doc>
+<status status="PASS" start="2026-07-15T11:48:43.564099" elapsed="1.902613"/>
+</kw>
+<kw name="Collections Are Loaded" owner="app">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-07-15T11:48:47.893702" level="INFO">Waited for Element with selector .collection-card &gt;&gt; nth=0 at state visible</msg>
+<arg>.collection-card &gt;&gt; nth=0</arg>
+<arg>visible</arg>
+<arg>timeout=${COLLECTIONS_TIMEOUT}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-07-15T11:48:45.467714" elapsed="2.425988"/>
+</kw>
+<doc>Blocks until at least one collection card is visible,
+meaning the /collections API call has completed.
+Uses &gt;&gt; nth=0 to target the first card and avoid strict-mode
+violations (the API returns 200+ collections).</doc>
+<status status="PASS" start="2026-07-15T11:48:45.467714" elapsed="2.425988"/>
+</kw>
+<kw name="Open First Collection" owner="app">
+<kw name="Click" owner="Browser">
+<msg time="2026-07-15T11:48:47.896708" level="INFO">Clicks the element '.open-button &gt;&gt; nth=0'.</msg>
+<arg>.open-button &gt;&gt; nth=0</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-07-15T11:48:47.895709" elapsed="0.149528"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-07-15T11:48:48.064759" level="INFO">Waited for Element with selector .icon-img &gt;&gt; nth=0 at state visible</msg>
+<arg>.icon-img &gt;&gt; nth=0</arg>
+<arg>visible</arg>
+<arg>timeout=${ICONS_TIMEOUT}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-07-15T11:48:48.045237" elapsed="0.020526"/>
+</kw>
+<doc>Clicks the first "Open" button and waits until at least one
+full-size icon image is rendered in the right panel.
+Uses &gt;&gt; nth=0 to avoid strict-mode violations.</doc>
+<status status="PASS" start="2026-07-15T11:48:47.894704" elapsed="0.171059"/>
+</kw>
+<kw name="Get Text" owner="Browser">
+<msg time="2026-07-15T11:48:48.112758" level="INFO">Text: ['Material Symbols - Icons']</msg>
+<arg>h2 &gt;&gt; nth=1</arg>
+<arg>contains</arg>
+<arg>- Icons</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-07-15T11:48:48.065763" elapsed="0.047996"/>
+</kw>
+<kw name="Close Browser" owner="Browser" type="TEARDOWN">
+<msg time="2026-07-15T11:48:48.555658" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-07-15T11:48:48.113759" elapsed="0.441899"/>
+</kw>
+<doc>The right-panel heading must follow the pattern
+"&lt;Collection Name&gt; - Icons" so the user knows which set is open.
+The second h2 on the page belongs to the right panel.</doc>
+<status status="PASS" start="2026-07-15T11:48:43.555095" elapsed="5.001571"/>
+</test>
+<test id="s1-s2-t7" name="Opening A Different Collection Replaces Previous Icons" line="68">
+<kw name="Open Iconify Navigator" owner="app" type="SETUP">
+<kw name="New Browser" owner="Browser">
+<msg time="2026-07-15T11:48:48.581124" level="INFO">{"browser": "chromium", "headless": false, "chromiumSandbox": false, "devtools": false, "handleSIGHUP": true, "handleSIGINT": true, "handleSIGTERM": true, "slowMo": 0.0, "timeout": 30000.0, "tracesDir": "C:\\Users\\saint\\progetti\\IconifyNavigator\\robot\\results\\angular\\browser\\traces\\temp\\bf23fad9-2de9-47ef-870a-4d6c3e76402d"}</msg>
+<msg time="2026-07-15T11:48:49.366985" level="INFO">Successfully created browser with options: {"browser":"chromium","headless":false,"chromiumSandbox":false,"devtools":false,"handleSIGHUP":true,"handleSIGINT":true,"handleSIGTERM":true,"slowMo":0,"timeout":30000,"tracesDir":"C:\\Users\\saint\\progetti\\IconifyNavigator\\robot\\results\\angular\\browser\\traces\\temp\\bf23fad9-2de9-47ef-870a-4d6c3e76402d"}</msg>
+<arg>${BROWSER_TYPE}</arg>
+<arg>headless=${HEADLESS}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Create a new playwright Browser with specified options.</doc>
+<status status="PASS" start="2026-07-15T11:48:48.579122" elapsed="0.788863"/>
+</kw>
+<kw name="New Page" owner="Browser">
+<msg time="2026-07-15T11:48:50.397040" level="INFO">Successfully initialized new page object and opened url: http://localhost:4200</msg>
+<msg time="2026-07-15T11:48:50.397040" level="INFO">No context was open. New context was automatically opened when this page is created.</msg>
+<arg>${APP_URL}</arg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Open a new Page.</doc>
+<status status="PASS" start="2026-07-15T11:48:49.367985" elapsed="1.030053"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-07-15T11:48:50.441719" level="INFO">Waited for Element with selector h1 at state visible</msg>
+<arg>h1</arg>
+<arg>visible</arg>
+<arg>timeout=10s</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-07-15T11:48:50.398038" elapsed="0.044679"/>
+</kw>
+<doc>Opens a fresh browser window and navigates to the app.
+Waits until the main heading is visible before returning.</doc>
+<status status="PASS" start="2026-07-15T11:48:48.578121" elapsed="1.864596"/>
+</kw>
+<kw name="Collections Are Loaded" owner="app">
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-07-15T11:48:52.843624" level="INFO">Waited for Element with selector .collection-card &gt;&gt; nth=0 at state visible</msg>
+<arg>.collection-card &gt;&gt; nth=0</arg>
+<arg>visible</arg>
+<arg>timeout=${COLLECTIONS_TIMEOUT}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-07-15T11:48:50.443715" elapsed="2.400909"/>
+</kw>
+<doc>Blocks until at least one collection card is visible,
+meaning the /collections API call has completed.
+Uses &gt;&gt; nth=0 to target the first card and avoid strict-mode
+violations (the API returns 200+ collections).</doc>
+<status status="PASS" start="2026-07-15T11:48:50.442717" elapsed="2.401907"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2026-07-15T11:48:52.845710" level="INFO">Clicks the element '.open-button &gt;&gt; nth=0'.</msg>
+<arg>.open-button &gt;&gt; nth=0</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-07-15T11:48:52.844624" elapsed="0.056352"/>
+</kw>
+<kw name="Wait For Elements State" owner="Browser">
+<msg time="2026-07-15T11:48:53.181498" level="INFO">Waited for Element with selector .icon-img &gt;&gt; nth=0 at state visible</msg>
+<arg>.icon-img &gt;&gt; nth=0</arg>
+<arg>visible</arg>
+<arg>timeout=${ICONS_TIMEOUT}</arg>
+<tag>PageContent</tag>
+<tag>Wait</tag>
+<doc>Waits for the element found by ``selector`` to satisfy state option.</doc>
+<status status="PASS" start="2026-07-15T11:48:52.901979" elapsed="0.281527"/>
+</kw>
+<kw name="Get Text" owner="Browser">
+<msg time="2026-07-15T11:48:54.201020" level="INFO">Text: ['Material Symbols - Icons']</msg>
+<msg time="2026-07-15T11:48:54.201020" level="INFO">${first_heading} = Material Symbols - Icons</msg>
+<var>${first_heading}</var>
+<arg>h2 &gt;&gt; nth=1</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-07-15T11:48:53.183506" elapsed="1.018514"/>
+</kw>
+<kw name="Click" owner="Browser">
+<msg time="2026-07-15T11:48:54.203107" level="INFO">Clicks the element '.open-button &gt;&gt; nth=1'.</msg>
+<arg>.open-button &gt;&gt; nth=1</arg>
+<tag>PageContent</tag>
+<tag>Setter</tag>
+<doc>Simulates mouse click on the element found by ``selector``.</doc>
+<status status="PASS" start="2026-07-15T11:48:54.202020" elapsed="0.404142"/>
+</kw>
+<kw name="Wait Until Keyword Succeeds" owner="BuiltIn">
+<kw name="Heading Should Change" owner="app">
+<kw name="Get Text" owner="Browser">
+<msg time="2026-07-15T11:48:54.629712" level="INFO">Text: ['Material Symbols Light - Icons']</msg>
+<msg time="2026-07-15T11:48:54.630713" level="INFO">${current} = Material Symbols Light - Icons</msg>
+<var>${current}</var>
+<arg>h2 &gt;&gt; nth=1</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns text attribute of the element found by ``selector``.</doc>
+<status status="PASS" start="2026-07-15T11:48:54.609327" elapsed="0.021386"/>
+</kw>
+<kw name="Should Not Be Equal" owner="BuiltIn">
+<arg>${current}</arg>
+<arg>${old_heading}</arg>
+<doc>Fails if the given objects are equal.</doc>
+<status status="PASS" start="2026-07-15T11:48:54.631330" elapsed="0.000568"/>
+</kw>
+<arg>${first_heading}</arg>
+<doc>Asserts that the second h2 on the page no longer contains
+the provided text. Used to verify the right panel updated.</doc>
+<status status="PASS" start="2026-07-15T11:48:54.608301" elapsed="0.023597"/>
+</kw>
+<arg>15s</arg>
+<arg>500ms</arg>
+<arg>Heading Should Change</arg>
+<arg>${first_heading}</arg>
+<doc>Runs the specified keyword and retries if it fails.</doc>
+<status status="PASS" start="2026-07-15T11:48:54.607168" elapsed="0.024730"/>
+</kw>
+<kw name="Get Element Count" owner="Browser">
+<arg>.right-panel .icon-img</arg>
+<arg>&gt;</arg>
+<arg>0</arg>
+<tag>Assertion</tag>
+<tag>Getter</tag>
+<tag>PageContent</tag>
+<doc>Returns the count of elements found with ``selector``.</doc>
+<status status="PASS" start="2026-07-15T11:48:54.631898" elapsed="0.019018"/>
+</kw>
+<kw name="Close Browser" owner="Browser" type="TEARDOWN">
+<msg time="2026-07-15T11:48:55.630986" level="INFO">Closed browser</msg>
+<tag>BrowserControl</tag>
+<tag>Setter</tag>
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-07-15T11:48:54.651916" elapsed="0.980073"/>
+</kw>
+<doc>Clicking "Open" on a second collection must replace the
+right-panel content with that collection's icons.
+The heading changes, confirming the panel was updated.</doc>
+<status status="PASS" start="2026-07-15T11:48:48.569034" elapsed="7.062955"/>
+</test>
+<doc>Acceptance tests for Iconify Navigator — release 0.0.2.
+
+Criteria:
+- The view is split into left (collection list) and right (icon detail) panels.
+- Each collection card displays Name, Category, Tags plus the first 8 icons
+  as a 2×4 preview grid (48×48 px each, class collection-preview-img).
+- Each card has an "Open" button (label: Open).
+- Pressing Open shows the full icon set in the right panel.
+- Pressing Open on the already-displayed collection does nothing.
+- Pressing Open on a different collection replaces the right-panel content.
+- The right panel scrolls; icons must have non-zero dimensions.
+
+Prerequisites: the app must be running on http://localhost:4200.</doc>
+<status status="PASS" start="2026-07-15T11:48:18.297207" elapsed="37.348055"/>
+</suite>
+<status status="PASS" start="2026-07-15T11:48:00.580759" elapsed="55.076499"/>
+</suite>
+<statistics>
+<total>
+<stat pass="10" fail="0" skip="0">All Tests</stat>
+</total>
+<tag>
+</tag>
+<suite>
+<stat name="Tests" id="s1" pass="10" fail="0" skip="0">Tests</stat>
+<stat name="V0.0.1 Acceptance" id="s1-s1" pass="3" fail="0" skip="0">Tests.V0.0.1 Acceptance</stat>
+<stat name="V0.0.2 Acceptance" id="s1-s2" pass="7" fail="0" skip="0">Tests.V0.0.2 Acceptance</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>

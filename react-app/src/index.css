@@ -1,0 +1,442 @@
+/* =========================================================
+   Shared styles for the React implementation of Iconify Navigator.
+   Class names mirror the Angular component so Robot Framework tests
+   work against both apps with the same selectors.
+   ========================================================= */
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  color: #333;
+  background: #fff;
+}
+
+/* ─── Root container ──────────────────────────────────────── */
+.container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  margin-bottom: 16px;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 4px;
+}
+
+/* ─── Two-column layout ────────────────────────────────────── */
+/* Right panel only scrolls (acceptance criterion 0.0.2) */
+.browser-layout {
+  display: grid;
+  grid-template-columns: 420px 1fr;
+  gap: 16px;
+  height: calc(100vh - 120px);
+}
+
+.left-panel {
+  overflow-y: auto;
+  padding-right: 8px;
+  border-right: 1px solid #ddd;
+}
+
+.right-panel {
+  overflow-y: auto;
+  padding-left: 8px;
+}
+
+.left-panel h2,
+.right-panel h2 {
+  margin-bottom: 12px;
+}
+
+.right-empty-hint {
+  color: #666;
+  margin-top: 40px;
+  text-align: center;
+}
+
+/* ─── Search form ─────────────────────────────────────────── */
+.search-form {
+  display: grid;
+  gap: 12px;
+  background: #f7f7f7;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.search-form div {
+  display: grid;
+  gap: 6px;
+}
+
+.search-form label {
+  font-weight: 600;
+}
+
+.search-form input {
+  padding: 8px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ─── Collections list ────────────────────────────────────── */
+.collections-list {
+  margin-top: 8px;
+}
+
+.collection-card {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+  background: #fafafa;
+  margin-bottom: 8px;
+	display: flex;
+}
+
+.collection-meta p {
+  margin: 2px 0;
+  font-size: 0.85rem;
+	background-color: red;
+}
+
+/* ─── Collection preview grid (2 rows × 4 columns, 48×48 px) ─ */
+.preview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 24px);
+  grid-template-rows: repeat(2, 24px);
+  gap: 4px;
+  margin: 8px 0;
+	display: inline-block;
+}
+
+.collection-preview-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.preview-placeholder {
+  width: 48px;
+  height: 48px;
+  background: #eee;
+  border-radius: 4px;
+}
+
+/* ─── Buttons ─────────────────────────────────────────────── */
+.open-button {
+  padding: 6px 16px;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.open-button:hover {
+  background-color: #1565c0;
+}
+
+button {
+  padding: 8px 16px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  cursor: pointer;
+  background: #fff;
+}
+
+button:hover {
+  background: #f0f0f0;
+}
+
+.icon-clickable {
+  cursor: pointer;
+}
+
+.dialog-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.dialog {
+  width: min(760px, 96vw);
+  background: #fff;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.dialog-grid {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.dialog-grid input,
+.dialog-grid select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+}
+
+#icn\.tagstring {
+  width: 100%;
+  min-height: 80px;
+  resize: vertical;
+  padding: 8px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+/* ─── Icon grid (right panel) ─────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Fixed-height preview box keeps every card aligned consistently */
+.icon-preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 56px;
+  margin-bottom: 8px;
+}
+
+.icon-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.icon-name {
+  font-size: 0.75rem;
+  word-break: break-all;
+  margin: 4px 0;
+}
+
+.icon-tags {
+  font-size: 0.7rem;
+  color: #555;
+  margin: 2px 0;
+}
+
+/* ─── Error state ─────────────────────────────────────────── */
+.error {
+  color: #b00020;
+}
+
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  color: #333;
+  background: #fff;
+}
+
+/* ─── Root container ──────────────────────────────────────── */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+header {
+  margin-bottom: 20px;
+}
+
+header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 4px;
+}
+
+/* ─── Search form ─────────────────────────────────────────── */
+.search-form {
+  display: grid;
+  gap: 12px;
+  background: #f7f7f7;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.search-form div {
+  display: grid;
+  gap: 6px;
+}
+
+.search-form label {
+  font-weight: 600;
+}
+
+.search-form input {
+  padding: 8px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* ─── Sections ────────────────────────────────────────────── */
+.section {
+  margin-top: 20px;
+}
+
+.section h2 {
+  margin-bottom: 12px;
+}
+
+/* ─── Collections list ────────────────────────────────────── */
+.collections-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.collection-card {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 12px;
+  background: #fafafa;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.collection-details {
+  flex: 1;
+}
+
+.collection-details p {
+  margin: 4px 0;
+}
+
+/* ─── Buttons ─────────────────────────────────────────────── */
+.open-button,
+.close-button {
+  padding: 8px 16px;
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-left: 12px;
+}
+
+.open-button:hover,
+.close-button:hover {
+  background-color: #1565c0;
+}
+
+/* ─── Icon grid ───────────────────────────────────────────── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* The icon preview box has a fixed height so every card aligns consistently. */
+.icon-preview {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 56px;
+  margin-bottom: 8px;
+}
+
+.icon-img {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+.icon-name {
+  font-size: 0.75rem;
+  word-break: break-all;
+  margin: 4px 0;
+}
+
+/* ─── Error state ─────────────────────────────────────────── */
+.error {
+  color: #b00020;
+}
+
+/* ─── Generic buttons (search form) ──────────────────────── */
+button {
+  padding: 8px 16px;
+  border: 1px solid #bbb;
+  border-radius: 4px;
+  cursor: pointer;
+  background: #fff;
+}
+
+button:hover {
+  background: #f0f0f0;
+}

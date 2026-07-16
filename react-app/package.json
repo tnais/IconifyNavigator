@@ -1,0 +1,24 @@
+{
+  "name": "iconify-navigator-react",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite --port 4300",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview --port 4300",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "@types/react": "^18.3.1",
+    "@types/react-dom": "^18.3.1",
+    "@vitejs/plugin-react": "^4.3.1",
+    "jsdom": "^25.0.0",    "typescript": "^5.6.2",
+    "vite": "^5.4.8",
+    "vitest": "^2.1.4"
+  }
+}
