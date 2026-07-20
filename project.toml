@@ -1,0 +1,24 @@
+[_]
+schema-version = "0.2"
+
+[build]
+include-files = [
+  "src/**/*",
+  "react-app/**/*",
+  "desktop/**/*",
+  "angular.json",
+  "tsconfig*.json",
+  "jest.config.js",
+  "setup-jest.ts",
+  "package*.json"
+]
+
+[build.env]
+  BP_NODE_RUN_SCRIPTS = "build"
+  BP_WEB_SERVER_ROOT = "dist/iconifynavigator"
+  BP_WEB_SERVER_ENABLE_PUSH_STATE = "true"
+
+[metadata]
+name = "IconifyNavigator"
+version = "1.0.0"
+description = "A browser for Iconify installations packaged with Paketo buildpacks"

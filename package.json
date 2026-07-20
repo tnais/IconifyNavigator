@@ -1,0 +1,71 @@
+{
+  "name": "iconifynavigator",
+  "version": "1.0.0",
+  "private": true,
+  "type": "commonjs",
+  "main": "desktop/main.js",
+  "scripts": {
+    "build": "ng build",
+    "server": "ng serve",
+    "serve": "ng serve",
+    "serve:react": "npm run dev --prefix react-app",
+    "start": "node -e \"require('http').createServer((req,res)=>{const url=require('url').parse(req.url);if(url.pathname==='/'||url.pathname.endsWith('.html'))url.pathname='/index.html';const fs=require('fs'),path=require('path'),file=require('path').join('./dist',url.pathname);try{res.end(fs.readFileSync(file))}catch(e){res.statusCode=404;res.end('Not Found')}}).listen(3000,'0.0.0.0')\" || npx serve -s dist -l 3000",
+    "start:serve": "npx serve -s dist -l 3000",
+    "desktop:start": "npm run build -- --configuration production && electron .",
+    "desktop:package:win": "npm run build -- --configuration production && electron-builder --win portable",
+    "desktop:package:linux": "npm run build -- --configuration production && electron-builder --linux zip",
+    "desktop:package:all": "npm run build -- --configuration production && electron-builder --win portable --linux zip",
+    "test": "jest",
+    "test:robot": "robot --outputdir robot/results/angular robot/tests/",
+    "test:robot:react": "robot --variable APP_URL:http://localhost:4300 --outputdir robot/results/react robot/tests/"
+  },
+  "dependencies": {
+    "@angular/animations": "21.2.18",
+    "@angular/common": "21.2.18",
+    "@angular/core": "21.2.18",
+    "@angular/forms": "21.2.18",
+    "@angular/platform-browser": "21.2.18",
+    "@angular/platform-browser-dynamic": "21.2.18",
+    "rxjs": "7.8.2",
+    "tslib": "2.8.1",
+    "zone.js": "0.16.2"
+  },
+  "devDependencies": {
+    "@angular-devkit/build-angular": "21.2.19",
+    "@angular/cli": "21.2.19",
+    "@angular/compiler": "21.2.18",
+    "@angular/compiler-cli": "21.2.18",
+    "@types/jest": "30.0.0",
+    "@types/node": "26.1.1",
+    "jest": "30.4.2",
+    "jest-environment-jsdom": "30.4.1",
+    "jest-preset-angular": "17.0.0",
+    "electron": "31.7.7",
+    "electron-builder": "24.13.3",
+    "ts-jest": "29.4.11",
+    "typescript": "5.9.3"
+  },
+  "build": {
+    "appId": "com.iconifynavigator.desktop",
+    "productName": "IconifyNavigator",
+    "directories": {
+      "output": "dist-desktop"
+    },
+    "files": [
+      "desktop/**/*",
+      "dist/iconifynavigator/**/*",
+      "package.json"
+    ],
+    "win": {
+      "target": [
+        "portable"
+      ]
+    },
+    "linux": {
+      "target": [
+        "zip"
+      ],
+      "category": "Utility"
+    }
+  }
+}
