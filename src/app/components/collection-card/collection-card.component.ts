@@ -64,10 +64,10 @@ import { IconifyService } from '../../services/iconify.service';
   styles: [
     `
       .collection-card {
-        border: 1px solid #ddd;
+        border: 1px solid var(--border-default);
         border-radius: 6px;
         padding: 12px;
-        background: #fafafa;
+        background: var(--bg-card);
         margin-bottom: 8px;
         display: flex;
       }
@@ -94,13 +94,13 @@ import { IconifyService } from '../../services/iconify.service';
       .preview-placeholder {
         width: 24px;
         height: 24px;
-        background: #eee;
+        background: var(--bg-surface-muted);
         border-radius: 4px;
       }
       .open-button {
         padding: 6px 16px;
         margin-left: 4px;
-        background-color: #1976d2;
+        background-color: var(--accent);
         color: white;
         border: none;
         border-radius: 4px;
@@ -109,7 +109,7 @@ import { IconifyService } from '../../services/iconify.service';
         height: 25%;
       }
       .open-button:hover {
-        background-color: #1565c0;
+        background-color: var(--accent-hover);
       }
     `
   ]

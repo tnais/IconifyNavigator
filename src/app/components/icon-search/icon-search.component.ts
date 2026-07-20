@@ -36,8 +36,8 @@ import { IconSearchOptions } from '../../models/icon.model';
       .search-form {
         display: grid;
         gap: 12px;
-        background: #f7f7f7;
-        border: 1px solid #ddd;
+        background: var(--bg-surface-muted);
+        border: 1px solid var(--border-default);
         border-radius: 8px;
         padding: 16px;
       }
@@ -50,8 +50,10 @@ import { IconSearchOptions } from '../../models/icon.model';
       }
       input {
         padding: 8px;
-        border: 1px solid #bbb;
+        border: 1px solid var(--border-strong);
         border-radius: 4px;
+        background: var(--bg-input);
+        color: var(--text-primary);
       }
       .actions {
         display: flex;

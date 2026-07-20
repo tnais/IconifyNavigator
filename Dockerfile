@@ -16,7 +16,7 @@ COPY angular.json tsconfig*.json jest.config.js setup-jest.ts ./
 COPY src ./src
 COPY desktop ./desktop
 COPY react-app ./react-app
-COPY public ./public
+# COPY public ./public ## allucinazione
 
 # Build the Angular app
 RUN npm run build -- --configuration production
@@ -31,14 +31,15 @@ RUN npm install -g serve
 
 # Copy only built artifacts
 COPY --from=builder /app/dist/iconifynavigator ./dist
-COPY --from=builder /app/src/iconify-server.txt ./dist/ 2>/dev/null || true
+#COPY --from=builder /app/src/iconify-server.txt ./dist/ 2>/dev/null || true
+COPY --from=builder /app/src/iconify-server.txt ./dist
 
 # Expose default port
-EXPOSE 3000
+EXPOSE 4200
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:3000', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"
+  CMD node -e "require('http').get('http://localhost:4200', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"
 
 # Run the web server
-CMD ["serve", "-s", "dist", "-l", "3000"]
+CMD ["serve", "-s", "dist", "-l", "4200"]

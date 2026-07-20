@@ -95,6 +95,10 @@ export class IconifyService {
     return this.iconifyServerUrl;
   }
 
+  /**
+   * Internal helper to fetch all icons for a collection, with caching.
+   * Returns cached data if already loaded; otherwise fetches from the API and updates the cache.
+   */
   private async getCollectionIconsInternal(prefix: string): Promise<Icon[]> {
     if (this.collectionsCache$.value.length === 0) {
       await this.loadCollectionsMetadata();
@@ -117,6 +121,10 @@ export class IconifyService {
     return loaded.icons;
   }
 
+  /**
+   * Extracts the first non-comment, non-empty line from the server URL text file.
+   * Lines beginning with # or // are treated as comments and ignored.
+   */
   private parseServerUrl(fileContent: string): string {
     const lines = fileContent
       .split(/\r?\n/)
@@ -125,6 +133,11 @@ export class IconifyService {
     return lines[0] || '';
   }
 
+  /**
+   * Loads collection metadata from the /collections endpoint.
+   * Falls back to a bundled snapshot at assets/collections.json when the API is unreachable.
+   * Guard: if the cache is already populated this is a no-op to prevent duplicate loads.
+   */
   private async loadCollectionsMetadata(): Promise<IconCollection[]> {
     if (this.collectionsCache$.value.length > 0) {
       return this.collectionsCache$.value;
@@ -284,6 +297,10 @@ export class IconifyService {
     };
   }
 
+  /**
+   * Wraps HttpClient.get() with a timeout and error conversion to Exception.
+   * Throws an Error with a human-readable message on timeout or network failure.
+   */
   private async requestWithTimeout<T>(url: string, resourceName: string): Promise<T> {
     try {
       return await firstValueFrom(this.http.get<T>(url).pipe(timeout({ first: this.requestTimeoutMs })));
@@ -292,6 +309,10 @@ export class IconifyService {
     }
   }
 
+  /**
+   * Extracts a human-readable error message from an unknown error object.
+   * Falls back to a generic message if the error has no readable message property.
+   */
   private toErrorMessage(error: unknown): string {
     if (error instanceof Error && error.message.trim().length > 0) {
       return error.message;

@@ -225,6 +225,10 @@ function createTagsFromIconName(iconName: string, category: string): string[] {
  * Filters icons across all loaded collections using the supplied search options.
  * All comparisons are case-insensitive. An absent option means "match everything".
  */
+/**
+ * Filters icons across all loaded collections using the supplied search options.
+ * All comparisons are case-insensitive. An absent option means "match everything".
+ */
 function performSearch(collections: IconCollection[], options: IconSearchOptions): SearchResult {
   const name = options.name?.toLowerCase();
   const category = options.category?.toLowerCase();

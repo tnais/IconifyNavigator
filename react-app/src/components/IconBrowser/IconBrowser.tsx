@@ -125,6 +125,9 @@ function IconBrowser({ collections }: Props) {
       });
   }
 
+  /**
+   * Opens the icon parameter dialog and initializes the generated <img /> tag.
+   */
   function openIconDialog(icon: Icon): void {
     setSelectedIcon(icon);
     const initial = createInitialDialogState();
@@ -132,12 +135,18 @@ function IconBrowser({ collections }: Props) {
     setTagString(buildTagString(icon, initial));
   }
 
+  /**
+   * Closes the dialog and resets all temporary state.
+   */
   function closeIconDialog(): void {
     setSelectedIcon(null);
     setTagDialog(createInitialDialogState());
     setTagString('');
   }
 
+  /**
+   * Updates one dialog field value and immediately regenerates the output tag string.
+   */
   function onDialogFieldChange<K extends keyof IconTagDialogState>(field: K, value: IconTagDialogState[K]): void {
     if (!selectedIcon) return;
     const next = { ...tagDialog, [field]: value };
@@ -145,6 +154,10 @@ function IconBrowser({ collections }: Props) {
     setTagString(buildTagString(selectedIcon, next));
   }
 
+  /**
+   * Copies the generated <img /> tag to the system clipboard.
+   * Falls back to document.execCommand if navigator.clipboard is unavailable.
+   */
   async function copyTagString(): Promise<void> {
     if (!tagString) return;
 
@@ -159,6 +172,43 @@ function IconBrowser({ collections }: Props) {
     copyArea.select();
     document.execCommand('copy');
     document.body.removeChild(copyArea);
+  }
+
+  /**
+   * Creates a fresh IconTagDialogState with all fields initialized to empty strings.
+   */
+  function createInitialDialogState(): IconTagDialogState {
+    return {
+      color: '',
+      width: '',
+      height: '',
+      flip: '',
+      rotate: ''
+    };
+  }
+
+  /**
+   * Generates the <img /> HTML tag and icon URL from an icon and dialog options.
+   * Query parameters are only appended if their values are non-empty after trimming.
+   */
+  function buildTagString(icon: Icon, options: IconTagDialogState): string {
+    const params: string[] = [];
+    const appendParam = (name: string, value: string): void => {
+      const normalized = value.trim();
+      if (normalized.length > 0) {
+        params.push(`${name}=${encodeURIComponent(normalized)}`);
+      }
+    };
+
+    appendParam('color', options.color);
+    appendParam('width', options.width);
+    appendParam('height', options.height);
+    appendParam('flip', options.flip);
+    appendParam('rotate', options.rotate);
+
+    const baseSrc = `${iconifyService.getServerUrl()}/${icon.collection}/${icon.name}.svg`;
+    const src = params.length > 0 ? `${baseSrc}?${params.join('&')}` : baseSrc;
+    return `<img src="${src}" />`;
   }
 
   return (
@@ -300,33 +350,3 @@ function IconBrowser({ collections }: Props) {
 }
 
 export default IconBrowser;
-
-function createInitialDialogState(): IconTagDialogState {
-  return {
-    color: '',
-    width: '',
-    height: '',
-    flip: '',
-    rotate: ''
-  };
-}
-
-function buildTagString(icon: Icon, options: IconTagDialogState): string {
-  const params: string[] = [];
-  const appendParam = (name: string, value: string): void => {
-    const normalized = value.trim();
-    if (normalized.length > 0) {
-      params.push(`${name}=${encodeURIComponent(normalized)}`);
-    }
-  };
-
-  appendParam('color', options.color);
-  appendParam('width', options.width);
-  appendParam('height', options.height);
-  appendParam('flip', options.flip);
-  appendParam('rotate', options.rotate);
-
-  const baseSrc = `${iconifyService.getServerUrl()}/${icon.collection}/${icon.name}.svg`;
-  const src = params.length > 0 ? `${baseSrc}?${params.join('&')}` : baseSrc;
-  return `<img src="${src}" />`;
-}

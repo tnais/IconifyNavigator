@@ -168,7 +168,7 @@ interface IconTagDialogState {
       .left-panel {
         overflow-y: auto;
         padding-right: 8px;
-        border-right: 1px solid #ddd;
+        border-right: 1px solid var(--border-default);
       }
       .right-panel {
         overflow-y: auto;
@@ -182,7 +182,7 @@ interface IconTagDialogState {
         margin-top: 8px;
       }
       .right-empty-hint {
-        color: #666;
+        color: var(--text-secondary);
         margin-top: 40px;
         text-align: center;
       }
@@ -194,10 +194,10 @@ interface IconTagDialogState {
         margin-top: 12px;
       }
       .card {
-        border: 1px solid #ddd;
+        border: 1px solid var(--border-default);
         border-radius: 6px;
         padding: 10px;
-        background: #fff;
+        background: var(--bg-surface);
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -225,16 +225,16 @@ interface IconTagDialogState {
       }
       .icon-tags {
         font-size: 0.7rem;
-        color: #555;
+        color: var(--text-muted);
         margin: 2px 0;
       }
       .error {
-        color: #b00020;
+        color: var(--error);
       }
       .dialog-backdrop {
         position: fixed;
         inset: 0;
-        background: rgba(0, 0, 0, 0.45);
+        background: var(--overlay-bg);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -242,9 +242,9 @@ interface IconTagDialogState {
       }
       .dialog {
         width: min(760px, 96vw);
-        background: #fff;
+        background: var(--bg-surface);
         border-radius: 8px;
-        border: 1px solid #ddd;
+        border: 1px solid var(--border-default);
         padding: 16px;
         display: grid;
         gap: 12px;
@@ -258,16 +258,20 @@ interface IconTagDialogState {
       .dialog-grid select {
         width: 100%;
         padding: 8px;
-        border: 1px solid #bbb;
+        border: 1px solid var(--border-strong);
         border-radius: 4px;
+        background: var(--bg-input);
+        color: var(--text-primary);
       }
       #icn\\.tagstring {
         width: 100%;
         height: 96px;
         resize: none;
         padding: 8px;
-        border: 1px solid #bbb;
+        border: 1px solid var(--border-strong);
         border-radius: 4px;
+        background: var(--bg-input);
+        color: var(--text-primary);
         font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         box-sizing: border-box;
       }
@@ -280,9 +284,9 @@ interface IconTagDialogState {
       .preview-square {
         width: 96px;
         height: 96px;
-        border: 1px solid #bbb;
+        border: 1px solid var(--border-strong);
         border-radius: 4px;
-        background: #f7f7f7;
+        background: #ffffff;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -460,6 +464,10 @@ export class IconBrowserComponent {
     document.body.removeChild(copyArea);
   }
 
+  /**
+   * Rebuilds the HTML tag string and preview URL based on the current dialog field values.
+   * This is called whenever any dialog field changes so the tag preview is always up-to-date.
+   */
   private updateTagString(): void {
     if (!this.selectedIcon) {
       this.tagString = '';
@@ -480,12 +488,19 @@ export class IconBrowserComponent {
     maybeAppendParam('flip', this.tagDialog.flip);
     maybeAppendParam('rotate', this.tagDialog.rotate);
 
-    const baseSrc = `${this.iconifyService.getServerUrl()}/${this.selectedIcon.collection}/${this.selectedIcon.name}.svg`;
+    const cs = this.iconifyService.getServerUrl();
+    const last_char = cs.substring(cs.length - 1);
+    const baseSrc = last_char === '/' ? `${cs}${this.selectedIcon.collection}/${this.selectedIcon.name}.svg`
+        : `${cs}/${this.selectedIcon.collection}/${this.selectedIcon.name}.svg`;
     const src = queryParams.length > 0 ? `${baseSrc}?${queryParams.join('&')}` : baseSrc;
     this.tagPreviewSrc = src;
     this.tagString = `<img src="${src}" />`;
   }
 
+  /**
+   * Creates a fresh IconTagDialogState with all fields initialized to empty strings.
+   * Used when opening the dialog or resetting it after closing.
+   */
   private createInitialDialogState(): IconTagDialogState {
     return {
       color: '',
