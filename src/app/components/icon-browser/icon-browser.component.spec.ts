@@ -83,6 +83,39 @@ describe('IconBrowserComponent', () => {
     expect(text).toContain('Material Design Icons - Icons');
   });
 
+  it('renders opened collection icons in scroll-driven batches', async () => {
+    iconifyService.getCollectionIcons.mockReturnValue(
+      of(
+        Array.from({ length: 50 }, (_, index) => ({
+          name: `icon-${index + 1}`,
+          category: 'mdi',
+          tags: [`tag-${index + 1}`],
+          collection: 'mdi'
+        }))
+      )
+    );
+
+    component.onOpenCollection(mdi);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    expect(fixture.nativeElement.querySelectorAll('.right-panel .icon-img').length).toBe(48);
+
+    component.onRightPanelScroll({
+      target: {
+        scrollTop: 1000,
+        clientHeight: 500,
+        scrollHeight: 1400
+      }
+    } as unknown as Event);
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    expect(component.visibleCollectionIcons.length).toBe(50);
+    expect(fixture.nativeElement.querySelectorAll('.right-panel .icon-img').length).toBe(50);
+  });
+
   it('does nothing when the same collection is opened twice', () => {
     component.onOpenCollection(mdi);
     // getCollectionIcons may have already been called by CollectionCardComponent (lazy preview);

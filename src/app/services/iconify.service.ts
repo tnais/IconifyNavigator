@@ -17,9 +17,6 @@ export class IconifyService {
   /** Maximum number of collections whose icons are loaded simultaneously during a search. */
   private readonly maxCollectionsToLoad = 6;
 
-  /** Maximum icons fetched per collection to avoid overwhelming the browser. */
-  private readonly maxIconsPerCollection = 250;
-
   /** Milliseconds before an HTTP request is considered timed out. */
   private readonly requestTimeoutMs = 8000;
 
@@ -218,7 +215,7 @@ export class IconifyService {
    *   - flat `icons` object  → keys are icon names
    *   - `categories` object  → values are arrays of icon names grouped by category
    *   - `uncategorized` array → icon names that belong to no category
-   * All three shapes are merged and capped at maxIconsPerCollection.
+   * All three shapes are merged so the full collection can be displayed.
    */
   private async loadCollection(prefix: string): Promise<IconCollection> {
     const remoteCollection = await this.requestWithTimeout<{
@@ -237,8 +234,7 @@ export class IconifyService {
     const fromFlat = Object.keys(remoteCollection?.icons || {});
     const fromCategories = Object.values(remoteCollection?.categories || {}).flat();
     const fromUncategorized = remoteCollection?.uncategorized || [];
-    const allNames = fromFlat.length > 0 ? fromFlat : [...fromCategories, ...fromUncategorized];
-    const iconNames = allNames.slice(0, this.maxIconsPerCollection);
+    const iconNames = fromFlat.length > 0 ? fromFlat : [...fromCategories, ...fromUncategorized];
 
     const category = (metadata?.prefix || prefix).toLowerCase();
 

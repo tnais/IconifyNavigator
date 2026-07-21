@@ -55,6 +55,29 @@ describe('IconifyService', () => {
     expect(result?.icons.map((icon) => icon.name)).toEqual(['home', 'home-outline']);
   });
 
+  it('returns the full collection instead of truncating icons', async () => {
+    const initPromise = service.initialize();
+    httpMock.expectOne('iconify-server.txt').flush('https://api.iconify.design');
+    await Promise.resolve();
+    httpMock.expectOne('https://api.iconify.design/collections').flush({
+      mdi: { name: 'Material Design Icons' }
+    });
+    await initPromise;
+
+    const icons = Object.fromEntries(
+      Array.from({ length: 260 }, (_, index) => [`icon-${index + 1}`, {}])
+    );
+
+    const resultPromise = firstValueFrom(service.getCollectionIcons('mdi'));
+    httpMock.expectOne('https://api.iconify.design/collection?prefix=mdi').flush({
+      icons
+    });
+    const result = await resultPromise;
+
+    expect(result).toHaveLength(260);
+    expect(result.at(-1)?.name).toBe('icon-260');
+  });
+
   it('falls back to local collections snapshot when remote collections request fails', async () => {
     const initPromise = service.initialize();
     httpMock.expectOne('iconify-server.txt').flush('https://api.iconify.design');

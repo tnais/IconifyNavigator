@@ -2,6 +2,17 @@
   "name": "iconifynavigator",
   "version": "1.0.0",
   "private": true,
+  "description": "",
+  "homepage": "https://github.com/tnais/IconifyNavigator#readme",
+  "bugs": {
+    "url": "https://github.com/tnais/IconifyNavigator/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tnais/IconifyNavigator.git"
+  },
+  "license": "GPL-3.0-or-later",
+  "author": "Saint",
   "type": "commonjs",
   "main": "desktop/main.js",
   "scripts": {

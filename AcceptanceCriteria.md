@@ -119,3 +119,11 @@ All queries that return JSON data have one common parameter:
 ### Application release 0.0.3 acceptance criteria:
 * all the above rules hold
 * the dialog box has a preview section that will show the icon with the parameters set in the dialog box. The preview section will be a square placed on the right of icn.tagstring, high as icn.tagstring; and the icon will be downloaded using the URL used in the <img /> tag shown in icn.tagstring and displayed inside the square, vertically and horizontally centered.
+* handle dark and light theme with contrasting icon color
+* handle base URLs ending with "/" never creating a complete URL with a '//' within
+* provide files to create a docker image
+
+# Application version 1
+## Application subversion 0.0
+### Application release 0.0.4 acceptance criteria:
+Opening a collection mush display all the icons, lazy loaded with infinite scroll.

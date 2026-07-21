@@ -53,7 +53,7 @@ interface IconTagDialogState {
       </div>
 
       <!-- ══ RIGHT PANEL: icon detail / search results ════════════════ -->
-      <div class="right-panel">
+      <div class="right-panel" (scroll)="onRightPanelScroll($event)">
 
         <!-- Empty state — shown before the user opens any collection or searches -->
         <p *ngIf="!openedCollection && !searched" class="right-empty-hint">
@@ -65,15 +65,18 @@ interface IconTagDialogState {
         <section *ngIf="openedCollection">
           <h2>{{ openedCollection.name }} - Icons</h2>
           <p *ngIf="loadingIcons">Loading icons...</p>
-          <div class="grid" *ngIf="collectionIcons.length > 0">
-            <article class="card icon-clickable" *ngFor="let icon of collectionIcons" (click)="openIconDialog(icon)">
+          <div class="grid" *ngIf="visibleCollectionIcons.length > 0">
+            <article class="card icon-clickable" *ngFor="let icon of visibleCollectionIcons" (click)="openIconDialog(icon)">
               <div class="icon-preview">
-                <img [src]="getIconUrl(icon)" [alt]="icon.name" class="icon-img" />
+                <img [src]="getIconUrl(icon)" [alt]="icon.name" class="icon-img" loading="lazy" />
               </div>
               <h3 class="icon-name">{{ icon.name }}</h3>
               <p class="icon-tags"><strong>tags:</strong> {{ (icon.tags || []).join(', ') || 'n/a' }}</p>
             </article>
           </div>
+          <p *ngIf="openedCollection && !loadingIcons && hasMoreCollectionIcons" class="collection-load-hint">
+            Scroll to load more icons...
+          </p>
         </section>
 
         <!-- Search results (shown when the user has searched but no collection is open) -->
@@ -85,7 +88,7 @@ interface IconTagDialogState {
           <div class="grid" *ngIf="icons.length > 0">
             <article class="card icon-clickable" *ngFor="let icon of icons" (click)="openIconDialog(icon)">
               <div class="icon-preview">
-                <img [src]="getIconUrl(icon)" [alt]="icon.name" class="icon-img" />
+                <img [src]="getIconUrl(icon)" [alt]="icon.name" class="icon-img" loading="lazy" />
               </div>
               <h3 class="icon-name">{{ icon.name }}</h3>
               <p class="icon-tags"><strong>tags:</strong> {{ (icon.tags || []).join(', ') || 'n/a' }}</p>
@@ -231,6 +234,11 @@ interface IconTagDialogState {
       .error {
         color: var(--error);
       }
+      .collection-load-hint {
+        color: var(--text-secondary);
+        margin: 12px 0 0;
+        text-align: center;
+      }
       .dialog-backdrop {
         position: fixed;
         inset: 0;
@@ -307,6 +315,9 @@ interface IconTagDialogState {
   ]
 })
 export class IconBrowserComponent {
+  /** Number of collection icons rendered at a time before the next scroll-driven batch loads. */
+  private readonly collectionIconBatchSize = 48;
+
   /** Collections passed in from the parent; rendered as cards in the left panel. */
   @Input() collections: IconCollection[] = [];
 
@@ -315,6 +326,9 @@ export class IconBrowserComponent {
 
   /** Icons for the currently opened collection; populated asynchronously after Open is clicked. */
   collectionIcons: Icon[] = [];
+
+  /** Icons from the opened collection that are currently rendered in the grid. */
+  visibleCollectionIcons: Icon[] = [];
 
   /** True while the icon list for the opened collection is being fetched. */
   loadingIcons = false;
@@ -342,6 +356,11 @@ export class IconBrowserComponent {
   /** URL used by both the generated tag and the live preview image. */
   tagPreviewSrc = '';
 
+  /** True when there are still unrendered icons left for the opened collection. */
+  get hasMoreCollectionIcons(): boolean {
+    return this.visibleCollectionIcons.length < this.collectionIcons.length;
+  }
+
   constructor(private iconifyService: IconifyService, private cdr: ChangeDetectorRef) {}
 
   /** Returns the Iconify SVG render URL for a given icon. */
@@ -366,6 +385,7 @@ export class IconBrowserComponent {
     console.log('[IconBrowser] Opening collection:', collection.prefix);
     this.openedCollection = collection;
     this.collectionIcons = [];
+    this.visibleCollectionIcons = [];
     this.loadingIcons = true;
     // Clear any previous search results so only the collection view is shown.
     this.searched = false;
@@ -376,12 +396,14 @@ export class IconBrowserComponent {
       next: (icons) => {
         console.log('[IconBrowser] Loaded icons:', icons.length, 'for', collection.prefix);
         this.collectionIcons = icons;
+        this.visibleCollectionIcons = icons.slice(0, this.collectionIconBatchSize);
         this.loadingIcons = false;
         this.cdr.detectChanges();
       },
       error: (err) => {
         console.error('[IconBrowser] Failed to load collection icons:', err);
         this.collectionIcons = [];
+        this.visibleCollectionIcons = [];
         this.loadingIcons = false;
         this.error = err?.message || 'Failed to load icons';
         this.cdr.detectChanges();
@@ -398,6 +420,7 @@ export class IconBrowserComponent {
     // Dismiss any currently open collection so the search results are shown.
     this.openedCollection = null;
     this.collectionIcons = [];
+    this.visibleCollectionIcons = [];
     this.loading = true;
     this.error = null;
     this.searched = true;
@@ -417,6 +440,28 @@ export class IconBrowserComponent {
         this.cdr.detectChanges();
       }
     });
+  }
+
+  /**
+   * Appends the next batch of collection icons when the right panel approaches the bottom.
+   * Called from the scroll container so the full collection is revealed incrementally.
+   */
+  onRightPanelScroll(_event?: Event): void {
+    if (!this.openedCollection || this.loadingIcons || !this.hasMoreCollectionIcons) {
+      return;
+    }
+
+    const nextIcons = this.collectionIcons.slice(
+      this.visibleCollectionIcons.length,
+      this.visibleCollectionIcons.length + this.collectionIconBatchSize
+    );
+
+    if (nextIcons.length === 0) {
+      return;
+    }
+
+    this.visibleCollectionIcons = [...this.visibleCollectionIcons, ...nextIcons];
+    this.cdr.detectChanges();
   }
 
   /** Opens the icon parameter dialog and initializes the generated <img /> tag. */
