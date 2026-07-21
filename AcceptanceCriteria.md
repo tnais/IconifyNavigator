@@ -146,9 +146,12 @@ All queries that return JSON data have one common parameter:
 * Multiple theme support:
   - **Light** — Clean white background with blue accents
   - **Dark** — Dark gray background with light blue accents
-  - **Mallard** — White background with professional garter blue (#3f5a7d) accents, inspired by Sir Nigel Gresley's iconic LNER A4 locomotive
+  - **Mallard** — White background with garter blue accents, inspired by Sir Nigel Gresley's iconic LNER A4 locomotive
   - **Mallard Dark** — Black background with lighter garter blue accents
   - **Mallard Accent** — Striking garter blue page background with black cards and light garter blue accents, echoing the Mallard's streamlined elegance
+  - **Tiger** — White background with warm orange accents, inspired by Sir Nigel Gresley's iconic LNER A4 locomotive
+  - **Tiger Dark** — Black background with lighter warm orange accents
+  - **Tiger Accent** — Striking warm orange page background with black cards and light garter blue accents, echoing the Mallard's streamlined elegance
 * Theme selector dropdown with localStorage persistence
 * Docker containerization with Paketo buildpacks support
 * Dockerfile for traditional Docker builds
