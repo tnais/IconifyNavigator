@@ -143,13 +143,26 @@ All queries that return JSON data have one common parameter:
   - Color, width, height customization
   - Rotation and flip parameters
   - Real-time icon preview
-* Dark and light theme support with contrast optimization
+* Multiple theme support:
+  - **Light** — Clean white background with blue accents
+  - **Dark** — Dark gray background with light blue accents
+  - **Mallard** — White background with professional garter blue (#3f5a7d) accents, inspired by Sir Nigel Gresley's iconic LNER A4 locomotive
+  - **Mallard Dark** — Black background with lighter garter blue accents
+  - **Mallard Accent** — Striking garter blue page background with black cards and light garter blue accents, echoing the Mallard's streamlined elegance
+* Theme selector dropdown with localStorage persistence
 * Docker containerization with Paketo buildpacks support
 * Dockerfile for traditional Docker builds
 * Configuration file support for custom Iconify server URLs
 * Desktop application packaging via Electron (Windows, Linux, macOS)
 * Comprehensive test coverage with Jest unit tests and Robot Framework acceptance tests
 * Angular framework with TypeScript for robust type safety
+
+**Theme Details:**
+The Mallard themes celebrate British engineering heritage through iconic color palettes:
+- **Mallard** and **Mallard Dark**: Classic variants featuring garter blue accents
+- **Mallard Accent**: Premium theme with garter blue dominating the page background, black cards for contrast
+
+All themes support automatic dark mode detection and user preferences are persisted across sessions.
 
 **Known Limitations:**
 * None currently reported
