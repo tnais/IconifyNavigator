@@ -6,6 +6,19 @@ import { IconifyService } from '../../services/iconify.service';
 import { IconCollection } from '../../models/icon.model';
 import { IconBrowserComponent } from '../icon-browser/icon-browser.component';
 
+/**
+ * IconifyNavigator v1.0.4
+ *
+ * Main application component for browsing and managing Iconify icon collections.
+ * Features:
+ * - Icon collection browser with search and filtering
+ * - Search by name, category, tags, and icon set name
+ * - Icon detail panel with customizable parameters
+ * - Dark/light theme support
+ * - Lazy-loaded infinite scroll
+ * - Docker containerization support
+ * - Desktop app packaging via Electron
+ */
 type ThemeMode = 'light' | 'dark';
 
 @Component({

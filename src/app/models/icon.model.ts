@@ -1,3 +1,10 @@
+/**
+ * IconifyNavigator v1.0.4
+ * Data Models
+ * 
+ * Type definitions for icons, collections, and search parameters.
+ */
+
 /** Represents a single icon entry within a collection. */
 export interface Icon {
   /** Icon name as returned by the Iconify API (e.g. "home", "account-circle"). */

@@ -1,3 +1,15 @@
+/**
+ * IconifyNavigator v1.0.4
+ * 
+ * Service for communicating with Iconify API.
+ * 
+ * Responsibilities:
+ * - Manage Iconify server URL configuration
+ * - Fetch and cache icon collections
+ * - Search icons across collections
+ * - Build URLs for icon requests with parameters
+ * - Handle timeouts and errors
+ */
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, firstValueFrom, from, of } from 'rxjs';

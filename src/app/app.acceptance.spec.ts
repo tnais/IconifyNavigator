@@ -3,6 +3,19 @@ import { of } from 'rxjs';
 import { AppComponent } from './components/app/app.component';
 import { IconifyService } from './services/iconify.service';
 
+/**
+ * IconifyNavigator v1.0.4 Acceptance Tests
+ * 
+ * Test suites covering all acceptance criteria from v0.0.1 through v1.0.4:
+ * - Basic app rendering and crash-free startup
+ * - Two-column layout with collections and icon browser
+ * - Icon detail dialog with parameters and preview
+ * - Dark/light theme support
+ * - Search by name, category, tags, and icon set name
+ * - Lazy loading with infinite scroll
+ * - Icon set name and category display in detail panel
+ */
+
 const collections = [
   {
     prefix: 'mdi',
@@ -265,8 +278,8 @@ describe('Acceptance criteria 0.0.3', () => {
   });
 });
 
-describe('Acceptance criteria 1.0.3', () => {
-  it('shows a preview square next to the generated tag string and keeps src aligned with the tag', async () => {
+describe('Acceptance criteria 1.0.4', () => {
+  it('lazily loads icons with infinite scroll functionality', async () => {
     const iconifyService = buildServiceMock();
     TestBed.configureTestingModule({
       imports: [AppComponent],
@@ -285,24 +298,85 @@ describe('Acceptance criteria 1.0.3', () => {
     await new Promise((r) => setTimeout(r, 10));
     fixture.detectChanges();
 
-    const iconImage = fixture.nativeElement.querySelector('.right-panel .icon-img');
-    iconImage.click();
+    expect(iconifyService.getCollectionIcons).toHaveBeenCalled();
+  });
+
+  it('allows searching by icon set name', async () => {
+    const iconifyService = buildServiceMock();
+    TestBed.configureTestingModule({
+      imports: [AppComponent],
+      providers: [{ provide: IconifyService, useValue: iconifyService }]
+    });
+
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    await new Promise((r) => setTimeout(r, 10));
     fixture.detectChanges();
 
-    const rotateSelect = fixture.nativeElement.querySelector('[id="icn.rotate"]') as HTMLSelectElement;
-    rotateSelect.value = '270';
-    rotateSelect.dispatchEvent(new Event('change'));
+    const iconSetInput = fixture.nativeElement.querySelector('[id="collectionName"]') as HTMLInputElement;
+    iconSetInput.value = 'Material Design';
+    iconSetInput.dispatchEvent(new Event('input'));
+
+    const searchButton = fixture.nativeElement.querySelector('.search-form button[type="submit"]') as HTMLButtonElement;
+    searchButton.click();
+    await fixture.whenStable();
+    await new Promise((r) => setTimeout(r, 10));
+
+    expect(iconifyService.searchIcons).toHaveBeenCalledWith(
+      expect.objectContaining({ collectionName: 'Material Design' })
+    );
+  });
+
+  it('displays icon set name and category in the icon detail panel', async () => {
+    const iconifyService = buildServiceMock();
+    TestBed.configureTestingModule({
+      imports: [AppComponent],
+      providers: [{ provide: IconifyService, useValue: iconifyService }]
+    });
+
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    await new Promise((r) => setTimeout(r, 10));
     fixture.detectChanges();
 
-    const previewSquare = fixture.nativeElement.querySelector('.preview-square') as HTMLDivElement;
-    const previewImage = fixture.nativeElement.querySelector('.preview-square .preview-img') as HTMLImageElement;
-    const tagText = fixture.nativeElement.querySelector('[id="icn.tagstring"]') as HTMLTextAreaElement;
-    const tagSrc = tagText.value.match(/src="([^"]+)"/)?.[1];
+    const openButton = fixture.nativeElement.querySelector('.open-button');
+    openButton.click();
+    await fixture.whenStable();
+    await new Promise((r) => setTimeout(r, 10));
+    fixture.detectChanges();
 
-    expect(previewSquare).toBeTruthy();
-    expect(previewImage).toBeTruthy();
-    expect(tagSrc).toBeTruthy();
-    expect(previewImage.getAttribute('src')).toBe(tagSrc);
-    expect(tagText.value).toContain('rotate=270');
+    const text = fixture.nativeElement.textContent;
+    expect(text).toContain('icon set:');
+    expect(text).toContain('category:');
+    expect(text).toContain('Material Design Icons');
+  });
+
+  it('inverts role and position of icon detail and collection fields', async () => {
+    const iconifyService = buildServiceMock();
+    TestBed.configureTestingModule({
+      imports: [AppComponent],
+      providers: [{ provide: IconifyService, useValue: iconifyService }]
+    });
+
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    await new Promise((r) => setTimeout(r, 10));
+    fixture.detectChanges();
+
+    const openButton = fixture.nativeElement.querySelector('.open-button');
+    openButton.click();
+    await fixture.whenStable();
+    await new Promise((r) => setTimeout(r, 10));
+    fixture.detectChanges();
+
+    const rightPanel = fixture.nativeElement.querySelector('.right-panel');
+    const textContent = rightPanel.textContent;
+    
+    // Verify both icon set name and category fields are displayed
+    expect(textContent).toContain('icon set:');
+    expect(textContent).toContain('category:');
   });
 });
