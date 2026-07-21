@@ -157,11 +157,6 @@ All queries that return JSON data have one common parameter:
 * Comprehensive test coverage with Jest unit tests and Robot Framework acceptance tests
 * Angular framework with TypeScript for robust type safety
 
-**Theme Details:**
-The Mallard themes celebrate British engineering heritage through iconic color palettes:
-- **Mallard** and **Mallard Dark**: Classic variants featuring garter blue accents
-- **Mallard Accent**: Premium theme with garter blue dominating the page background, black cards for contrast
-
 All themes support automatic dark mode detection and user preferences are persisted across sessions.
 
 **Known Limitations:**
