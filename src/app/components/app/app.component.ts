@@ -15,12 +15,12 @@ import { IconBrowserComponent } from '../icon-browser/icon-browser.component';
  * - Icon collection browser with search and filtering
  * - Search by name, category, tags, and icon set name
  * - Icon detail panel with customizable parameters
- * - Dark/light theme support + Mallard theme
+ * - Dark/light theme support + Mallard themes
  * - Lazy-loaded infinite scroll
  * - Docker containerization support
  * - Desktop app packaging via Electron
  */
-type ThemeMode = 'light' | 'dark' | 'mallard' | 'mallard-dark';
+type ThemeMode = 'light' | 'dark' | 'mallard' | 'mallard-dark' | 'mallard-accent';
 
 @Component({
   selector: 'app-root',
@@ -39,6 +39,7 @@ type ThemeMode = 'light' | 'dark' | 'mallard' | 'mallard-dark';
             <option value="dark">Dark</option>
             <option value="mallard">Mallard</option>
             <option value="mallard-dark">Mallard Dark</option>
+            <option value="mallard-accent">Mallard Accent</option>
           </select>
         </div>
       </header>

@@ -72,6 +72,25 @@
   --icon-filter: invert(1);
 }
 
+/* Mallard Accent theme: Garter blue backgrounds with black cards */
+:root[data-theme='mallard-accent'] {
+  --bg-page: #3f5a7d; /* Garter blue */
+  --bg-surface: #000000; /* Black cards */
+  --bg-surface-muted: #1a1a1a;
+  --bg-card: #000000; /* Black cards */
+  --bg-input: #1a1a1a;
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-muted: #b0b0b0;
+  --border-default: #6b8fb8; /* Lighter garter blue for borders */
+  --border-strong: #8fa6c7; /* Even lighter garter blue for strong borders */
+  --accent: #a8c5e0; /* Light garter blue for accents */
+  --accent-hover: #c0d7eb; /* Lighter garter blue on hover */
+  --error: #ff6b6b;
+  --overlay-bg: rgba(0, 0, 0, 0.7);
+  --icon-filter: invert(1);
+}
+
 html,
 body {
   height: 100%;

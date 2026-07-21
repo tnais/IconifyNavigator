@@ -177,4 +177,19 @@ describe('AppComponent', () => {
     expect(window.localStorage.getItem(themeStorageKey)).toBe('mallard-dark');
     expect(document.documentElement.getAttribute('data-theme')).toBe('mallard-dark');
   });
+
+  it('supports Mallard Accent theme selection and persistence', async () => {
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const selector = fixture.nativeElement.querySelector('.theme-selector') as HTMLSelectElement;
+    selector.value = 'mallard-accent';
+    selector.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.theme).toBe('mallard-accent');
+    expect(window.localStorage.getItem(themeStorageKey)).toBe('mallard-accent');
+    expect(document.documentElement.getAttribute('data-theme')).toBe('mallard-accent');
+  });
 });
