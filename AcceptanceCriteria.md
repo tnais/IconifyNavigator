@@ -129,3 +129,4 @@ All queries that return JSON data have one common parameter:
 * Opening a collection mush display all the icons, lazy loaded with infinite scroll.
 * Add a new search criteria for icons, "search for icon set name"
 * Add in the icon detail the category and the icon set name
+* In the icon detail, invert role and position of "icon detail" and "collection" fields
