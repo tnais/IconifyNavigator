@@ -1,2 +1,5 @@
 /report.html
 /output.xml
+/dist/
+/node_modules/
+/.angular/
