@@ -172,7 +172,7 @@ export class IconifyService {
 
   /** Ensures metadata is loaded, then delegates to the in-memory search. */
   private async searchIconsInternal(options: IconSearchOptions): Promise<SearchResult> {
-    const collections = await this.ensureSearchCollectionsLoaded();
+    const collections = await this.ensureSearchCollectionsLoaded(options);
     return this.performSearch(collections, options);
   }
 
@@ -180,12 +180,41 @@ export class IconifyService {
    * Loads up to maxCollectionsToLoad collections that have not yet been fetched.
    * This batched pre-loading strategy makes the first text search feel instant.
    */
-  private async ensureSearchCollectionsLoaded(): Promise<IconCollection[]> {
+  private async ensureSearchCollectionsLoaded(options?: IconSearchOptions): Promise<IconCollection[]> {
     if (this.collectionsCache$.value.length === 0) {
       await this.loadCollectionsMetadata();
     }
 
     const current = this.collectionsCache$.value;
+    const collectionNameQuery = options?.collectionName?.trim().toLowerCase();
+
+    if (collectionNameQuery) {
+      const prefixesToLoad = current
+        .filter(
+          (collection) =>
+            collection.name.toLowerCase().includes(collectionNameQuery) ||
+            collection.prefix.toLowerCase().includes(collectionNameQuery)
+        )
+        .filter((collection) => !this.loadedPrefixes.has(collection.prefix))
+        .map((collection) => collection.prefix);
+
+      if (prefixesToLoad.length === 0) {
+        return current;
+      }
+
+      const loadedCollections = await Promise.all(prefixesToLoad.map((prefix) => this.loadCollection(prefix)));
+      const loadedByPrefix = new Map(loadedCollections.map((collection) => [collection.prefix, collection]));
+      const merged = current.map((collection) => loadedByPrefix.get(collection.prefix) || collection);
+      merged.forEach((collection) => {
+        if (collection.icons.length > 0) {
+          this.loadedPrefixes.add(collection.prefix);
+        }
+      });
+
+      this.collectionsCache$.next(merged);
+      return merged;
+    }
+
     const prefixesToLoad = current
       .filter((collection) => !this.loadedPrefixes.has(collection.prefix))
       .slice(0, this.maxCollectionsToLoad)
@@ -272,9 +301,18 @@ export class IconifyService {
   private performSearch(collections: IconCollection[], options: IconSearchOptions): SearchResult {
     const name = options.name?.toLowerCase();
     const category = options.category?.toLowerCase();
+    const collectionName = options.collectionName?.toLowerCase();
     const tags = options.tags?.map((tag) => tag.toLowerCase()) || [];
 
-    const icons = collections.flatMap((collection) =>
+    const matchingCollections = collections.filter((collection) => {
+      return (
+        !collectionName ||
+        collection.name.toLowerCase().includes(collectionName) ||
+        collection.prefix.toLowerCase().includes(collectionName)
+      );
+    });
+
+    const icons = matchingCollections.flatMap((collection) =>
       collection.icons.filter((icon) => {
         const matchesName = !name || icon.name.toLowerCase().includes(name);
         const matchesCategory = !category || (icon.category || '').toLowerCase() === category;

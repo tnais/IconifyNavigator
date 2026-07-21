@@ -21,6 +21,11 @@ import { IconSearchOptions } from '../../models/icon.model';
       </div>
 
       <div>
+        <label for="collectionName">icon set</label>
+        <input id="collectionName" formControlName="collectionName" type="text" placeholder="Material Design Icons" />
+      </div>
+
+      <div>
         <label for="tags">tags</label>
         <input id="tags" formControlName="tagsInput" type="text" placeholder="house,outline" />
       </div>
@@ -67,7 +72,7 @@ export class IconSearchComponent {
   /** Notifies the parent component whenever a new search or reset is performed. */
   @Output() search = new EventEmitter<IconSearchOptions>();
 
-  /** Reactive form that binds the three filter fields (name, category, tags). */
+  /** Reactive form that binds the four filter fields (name, category, icon set, tags). */
   searchForm: FormGroup;
 
   constructor(private fb: FormBuilder) {
@@ -76,6 +81,7 @@ export class IconSearchComponent {
     this.searchForm = this.fb.group({
       name: [''],
       category: [''],
+      collectionName: [''],
       tagsInput: ['']
     });
   }
@@ -94,6 +100,7 @@ export class IconSearchComponent {
     this.search.emit({
       name: formValue.name || undefined,
       category: formValue.category || undefined,
+      collectionName: formValue.collectionName || undefined,
       tags: tags.length > 0 ? tags : undefined
     });
   }

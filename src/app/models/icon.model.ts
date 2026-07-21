@@ -45,6 +45,9 @@ export interface IconSearchOptions {
   /** Exact collection prefix to restrict results to one icon set. */
   category?: string;
 
+  /** Substring to match against the icon set display name or prefix. */
+  collectionName?: string;
+
   /** One or more tags; an icon matches if it contains at least one of them. */
   tags?: string[];
 }

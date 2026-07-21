@@ -138,9 +138,9 @@ interface IconTagDialogState {
               id="icn.rotate"
             >
               <option value=""></option>
-              <option value="1">90</option>
-              <option value="2">180</option>
-              <option value="3">270</option>
+              <option value="90">90</option>
+              <option value="180">180</option>
+              <option value="270">270</option>
             </select>
           </div>
 

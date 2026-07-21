@@ -27,6 +27,13 @@ function buildServiceMock() {
   return {
     initialize: jest.fn().mockResolvedValue(undefined),
     getCollections: jest.fn().mockReturnValue(of(collections)),
+    searchIcons: jest.fn().mockReturnValue(
+      of({
+        icons: [{ name: 'home', category: 'mdi', tags: ['house'], collection: 'mdi' }],
+        total: 1,
+        search: { collectionName: 'Material' }
+      })
+    ),
     getCollectionIcons: jest.fn().mockReturnValue(
       of([
         { name: 'home', category: 'mdi', tags: ['house'], collection: 'mdi' },
@@ -60,6 +67,34 @@ describe('Acceptance criteria 0.0.1', () => {
     // No icon images should be in the right panel before the user opens a collection.
     const rightPanel = fixture.nativeElement.querySelector('.right-panel');
     expect(rightPanel.querySelectorAll('.icon-img').length).toBe(0);
+  });
+
+  it('searches by icon set name', async () => {
+    const iconifyService = buildServiceMock();
+    TestBed.configureTestingModule({
+      imports: [AppComponent],
+      providers: [{ provide: IconifyService, useValue: iconifyService }]
+    });
+
+    const fixture = TestBed.createComponent(AppComponent);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    await new Promise((r) => setTimeout(r, 10));
+    fixture.detectChanges();
+
+    const iconSetInput = fixture.nativeElement.querySelector('[id="collectionName"]') as HTMLInputElement;
+    iconSetInput.value = 'Material';
+    iconSetInput.dispatchEvent(new Event('input'));
+
+    const searchButton = fixture.nativeElement.querySelector('.search-form button[type="submit"]') as HTMLButtonElement;
+    searchButton.click();
+    await fixture.whenStable();
+    await new Promise((r) => setTimeout(r, 10));
+    fixture.detectChanges();
+
+    expect(iconifyService.searchIcons).toHaveBeenCalledWith(
+      expect.objectContaining({ collectionName: 'Material' })
+    );
   });
 });
 
