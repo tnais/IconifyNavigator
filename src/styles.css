@@ -34,6 +34,44 @@
   --icon-filter: invert(1);
 }
 
+/* Mallard theme: Professional palette using black, garter blue, and white */
+:root[data-theme='mallard'] {
+  --bg-page: #ffffff;
+  --bg-surface: #ffffff;
+  --bg-surface-muted: #f0f4f8;
+  --bg-card: #f8fafc;
+  --bg-input: #ffffff;
+  --text-primary: #000000;
+  --text-secondary: #333333;
+  --text-muted: #666666;
+  --border-default: #cbd5e1;
+  --border-strong: #94a3b8;
+  --accent: #3f5a7d; /* Garter blue */
+  --accent-hover: #2d4052; /* Darker garter blue */
+  --error: #b00020;
+  --overlay-bg: rgba(0, 0, 0, 0.5);
+  --icon-filter: none;
+}
+
+/* Mallard theme dark variant */
+:root[data-theme='mallard-dark'] {
+  --bg-page: #000000;
+  --bg-surface: #111111;
+  --bg-surface-muted: #1a1a1a;
+  --bg-card: #0f0f0f;
+  --bg-input: #000000;
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-muted: #b0b0b0;
+  --border-default: #333333;
+  --border-strong: #555555;
+  --accent: #6b8fb8; /* Lighter garter blue for dark mode */
+  --accent-hover: #8fa6c7; /* Even lighter garter blue on hover */
+  --error: #ff6b6b;
+  --overlay-bg: rgba(0, 0, 0, 0.8);
+  --icon-filter: invert(1);
+}
+
 html,
 body {
   height: 100%;

@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef, NgZone } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
 import { IconifyService } from '../../services/iconify.service';
 import { IconCollection } from '../../models/icon.model';
@@ -14,17 +15,17 @@ import { IconBrowserComponent } from '../icon-browser/icon-browser.component';
  * - Icon collection browser with search and filtering
  * - Search by name, category, tags, and icon set name
  * - Icon detail panel with customizable parameters
- * - Dark/light theme support
+ * - Dark/light theme support + Mallard theme
  * - Lazy-loaded infinite scroll
  * - Docker containerization support
  * - Desktop app packaging via Electron
  */
-type ThemeMode = 'light' | 'dark';
+type ThemeMode = 'light' | 'dark' | 'mallard' | 'mallard-dark';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, HttpClientModule, IconBrowserComponent],
+  imports: [CommonModule, HttpClientModule, IconBrowserComponent, FormsModule],
   template: `
     <div class="container">
       <header>
@@ -32,9 +33,14 @@ type ThemeMode = 'light' | 'dark';
           <h1>Iconify Navigator</h1>
           <p>Search Iconify icons by name, category and tags</p>
         </div>
-        <button type="button" class="theme-toggle" (click)="toggleTheme()">
-          Theme: {{ theme === 'dark' ? 'Dark' : 'Light' }}
-        </button>
+        <div class="theme-controls">
+          <select class="theme-selector" [(ngModel)]="theme" (change)="onThemeChange(theme)">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+            <option value="mallard">Mallard</option>
+            <option value="mallard-dark">Mallard Dark</option>
+          </select>
+        </div>
       </header>
 
       <main>
@@ -61,15 +67,20 @@ type ThemeMode = 'light' | 'dark';
       header p {
         margin: 4px 0 0;
       }
-      .theme-toggle {
+      .theme-controls {
+        display: flex;
+        gap: 8px;
+      }
+      .theme-selector {
         border: 1px solid var(--border-strong);
         border-radius: 6px;
         background: var(--bg-surface);
         color: var(--text-primary);
         font-weight: 600;
         padding: 8px 12px;
+        cursor: pointer;
       }
-      .theme-toggle:hover {
+      .theme-selector:hover {
         background: var(--bg-surface-muted);
       }
       .error {
@@ -101,9 +112,17 @@ export class AppComponent implements OnInit {
     void this.initialize();
   }
 
-  /** Switches between light and dark theme and persists the user's explicit preference. */
+  /** Switches theme and persists the user's explicit preference. */
   toggleTheme(): void {
-    this.setTheme(this.theme === 'dark' ? 'light' : 'dark', true);
+    const themes: ThemeMode[] = ['light', 'dark', 'mallard', 'mallard-dark'];
+    const currentIndex = themes.indexOf(this.theme);
+    const nextIndex = (currentIndex + 1) % themes.length;
+    this.onThemeChange(themes[nextIndex]);
+  }
+
+  /** Public method to change theme from template. */
+  onThemeChange(theme: ThemeMode): void {
+    this.setTheme(theme, true);
   }
 
   /**

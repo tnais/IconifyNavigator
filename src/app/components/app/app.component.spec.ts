@@ -138,12 +138,43 @@ describe('AppComponent', () => {
     await fixture.whenStable();
     fixture.detectChanges();
 
-    const toggle = fixture.nativeElement.querySelector('.theme-toggle') as HTMLButtonElement;
-    toggle.click();
+    const selector = fixture.nativeElement.querySelector('.theme-selector') as HTMLSelectElement;
+    selector.value = 'dark';
+    selector.dispatchEvent(new Event('change'));
     fixture.detectChanges();
 
     expect(fixture.componentInstance.theme).toBe('dark');
     expect(window.localStorage.getItem(themeStorageKey)).toBe('dark');
     expect(document.documentElement.getAttribute('data-theme')).toBe('dark');
+  });
+
+  it('supports Mallard theme selection and persistence', async () => {
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const selector = fixture.nativeElement.querySelector('.theme-selector') as HTMLSelectElement;
+    selector.value = 'mallard';
+    selector.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.theme).toBe('mallard');
+    expect(window.localStorage.getItem(themeStorageKey)).toBe('mallard');
+    expect(document.documentElement.getAttribute('data-theme')).toBe('mallard');
+  });
+
+  it('supports Mallard Dark theme selection and persistence', async () => {
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const selector = fixture.nativeElement.querySelector('.theme-selector') as HTMLSelectElement;
+    selector.value = 'mallard-dark';
+    selector.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.theme).toBe('mallard-dark');
+    expect(window.localStorage.getItem(themeStorageKey)).toBe('mallard-dark');
+    expect(document.documentElement.getAttribute('data-theme')).toBe('mallard-dark');
   });
 });
