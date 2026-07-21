@@ -29,15 +29,35 @@ function buildServiceMock() {
     getCollections: jest.fn().mockReturnValue(of(collections)),
     searchIcons: jest.fn().mockReturnValue(
       of({
-        icons: [{ name: 'home', category: 'mdi', tags: ['house'], collection: 'mdi' }],
+        icons: [
+          {
+            name: 'home',
+            category: 'mdi',
+            collectionName: 'Material Design Icons',
+            tags: ['house'],
+            collection: 'mdi'
+          }
+        ],
         total: 1,
         search: { collectionName: 'Material' }
       })
     ),
     getCollectionIcons: jest.fn().mockReturnValue(
       of([
-        { name: 'home', category: 'mdi', tags: ['house'], collection: 'mdi' },
-        { name: 'user', category: 'mdi', tags: ['person'], collection: 'mdi' }
+        {
+          name: 'home',
+          category: 'mdi',
+          collectionName: 'Material Design Icons',
+          tags: ['house'],
+          collection: 'mdi'
+        },
+        {
+          name: 'user',
+          category: 'mdi',
+          collectionName: 'Material Design Icons',
+          tags: ['person'],
+          collection: 'mdi'
+        }
       ])
     ),
     getIconUrl: jest.fn().mockImplementation(
@@ -156,6 +176,8 @@ describe('Acceptance criteria 0.0.2', () => {
     expect(text).toContain('Material Design Icons - Icons');
     expect(text).toContain('home');
     expect(text).toContain('user');
+    expect(text).toContain('category:');
+    expect(text).toContain('icon set:');
   });
 
   it('does nothing when the same collection is opened again', async () => {

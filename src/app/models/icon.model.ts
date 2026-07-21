@@ -6,6 +6,9 @@ export interface Icon {
   /** Collection prefix used as a broad category label (e.g. "material-symbols"). */
   category?: string;
 
+  /** Human-readable icon set name (e.g. "Material Design Icons"). */
+  collectionName?: string;
+
   /** Searchable keywords derived from the icon name tokens plus the collection prefix. */
   tags?: string[];
 

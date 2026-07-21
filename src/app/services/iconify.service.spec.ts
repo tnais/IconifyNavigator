@@ -74,6 +74,7 @@ describe('IconifyService', () => {
 
     expect(result.total).toBe(2);
     expect(result.icons.every((icon) => icon.collection === 'mdi')).toBe(true);
+    expect(result.icons.every((icon) => icon.collectionName === 'Material Design Icons')).toBe(true);
     httpMock.expectNone('https://api.iconify.design/collection?prefix=tabler');
   });
 

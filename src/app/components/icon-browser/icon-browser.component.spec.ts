@@ -35,13 +35,29 @@ describe('IconBrowserComponent', () => {
     iconifyService = {
       searchIcons: jest.fn().mockReturnValue(
         of({
-          icons: [{ name: 'home', category: 'building', tags: ['house'], collection: 'mdi' }],
+          icons: [
+            {
+              name: 'home',
+              category: 'building',
+              collectionName: 'Material Design Icons',
+              tags: ['house'],
+              collection: 'mdi'
+            }
+          ],
           total: 1,
           search: { name: 'home' }
         })
       ),
       getCollectionIcons: jest.fn().mockReturnValue(
-        of([{ name: 'home', category: 'mdi', tags: ['house'], collection: 'mdi' }])
+        of([
+          {
+            name: 'home',
+            category: 'mdi',
+            collectionName: 'Material Design Icons',
+            tags: ['house'],
+            collection: 'mdi'
+          }
+        ])
       ),
       getIconUrl: jest.fn().mockReturnValue('https://api.iconify.design/mdi/home.svg'),
       getServerUrl: jest.fn().mockReturnValue('https://api.iconify.design')
@@ -81,6 +97,8 @@ describe('IconBrowserComponent', () => {
     expect(iconifyService.getCollectionIcons).toHaveBeenCalledWith('mdi');
     const text = fixture.nativeElement.textContent;
     expect(text).toContain('Material Design Icons - Icons');
+    expect(text).toContain('icon set:');
+    expect(text).toContain('category:');
   });
 
   it('renders opened collection icons in scroll-driven batches', async () => {
@@ -89,6 +107,7 @@ describe('IconBrowserComponent', () => {
         Array.from({ length: 50 }, (_, index) => ({
           name: `icon-${index + 1}`,
           category: 'mdi',
+          collectionName: 'Material Design Icons',
           tags: [`tag-${index + 1}`],
           collection: 'mdi'
         }))

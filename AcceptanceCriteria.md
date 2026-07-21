@@ -126,4 +126,6 @@ All queries that return JSON data have one common parameter:
 # Application version 1
 ## Application subversion 0.0
 ### Application release 0.0.4 acceptance criteria:
-Opening a collection mush display all the icons, lazy loaded with infinite scroll.
+* Opening a collection mush display all the icons, lazy loaded with infinite scroll.
+* Add a new search criteria for icons, "search for icon set name"
+* Add in the icon detail the category and the icon set name

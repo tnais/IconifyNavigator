@@ -270,6 +270,7 @@ export class IconifyService {
     const icons: Icon[] = iconNames.map((name) => ({
       name,
       collection: prefix,
+      collectionName: metadata?.name || prefix,
       category,
       tags: this.createTagsFromIconName(name, category)
     }));
