@@ -72,8 +72,9 @@ interface IconTagDialogState {
               </div>
               <h3 class="icon-name">{{ icon.name }}</h3>
               <p class="icon-meta"><strong>category:</strong> {{ icon.category || 'n/a' }}</p>
-              <p class="icon-meta"><strong>icon set:</strong> {{ icon.collectionName || icon.collection }}</p>
+              <p class="icon-meta"><strong>collection:</strong> {{ icon.collection }}</p>
               <p class="icon-tags"><strong>tags:</strong> {{ (icon.tags || []).join(', ') || 'n/a' }}</p>
+              <p><strong>icon set:</strong> {{ icon.collectionName || icon.collection }}</p>
             </article>
           </div>
           <p *ngIf="openedCollection && !loadingIcons && hasMoreCollectionIcons" class="collection-load-hint">
@@ -94,9 +95,9 @@ interface IconTagDialogState {
               </div>
               <h3 class="icon-name">{{ icon.name }}</h3>
               <p class="icon-meta"><strong>category:</strong> {{ icon.category || 'n/a' }}</p>
-              <p class="icon-meta"><strong>icon set:</strong> {{ icon.collectionName || icon.collection }}</p>
+              <p class="icon-meta"><strong>collection:</strong> {{ icon.collection }}</p>
               <p class="icon-tags"><strong>tags:</strong> {{ (icon.tags || []).join(', ') || 'n/a' }}</p>
-              <p><strong>collection:</strong> {{ icon.collection }}</p>
+              <p><strong>icon set:</strong> {{ icon.collectionName || icon.collection }}</p>
             </article>
           </div>
         </section>
