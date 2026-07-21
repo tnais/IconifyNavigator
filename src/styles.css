@@ -91,6 +91,63 @@
   --icon-filter: invert(1);
 }
 
+/* Tiger theme: Professional palette using black, tiger orange, and white */
+:root[data-theme='tiger'] {
+  --bg-page: #ffffff;
+  --bg-surface: #ffffff;
+  --bg-surface-muted: #fef5f0;
+  --bg-card: #fffbf8;
+  --bg-input: #ffffff;
+  --text-primary: #000000;
+  --text-secondary: #333333;
+  --text-muted: #666666;
+  --border-default: #e8d4c8;
+  --border-strong: #d4a894;
+  --accent: #d97706; /* Tiger orange */
+  --accent-hover: #b45309; /* Darker tiger orange */
+  --error: #b00020;
+  --overlay-bg: rgba(0, 0, 0, 0.5);
+  --icon-filter: none;
+}
+
+/* Tiger theme dark variant */
+:root[data-theme='tiger-dark'] {
+  --bg-page: #000000;
+  --bg-surface: #111111;
+  --bg-surface-muted: #1a1a1a;
+  --bg-card: #0f0f0f;
+  --bg-input: #000000;
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-muted: #b0b0b0;
+  --border-default: #333333;
+  --border-strong: #555555;
+  --accent: #f59e0b; /* Lighter tiger orange for dark mode */
+  --accent-hover: #fbbf24; /* Even lighter tiger orange on hover */
+  --error: #ff6b6b;
+  --overlay-bg: rgba(0, 0, 0, 0.8);
+  --icon-filter: invert(1);
+}
+
+/* Tiger Accent theme: Orange backgrounds with black cards */
+:root[data-theme='tiger-accent'] {
+  --bg-page: #d97706; /* Tiger orange */
+  --bg-surface: #000000; /* Black cards */
+  --bg-surface-muted: #1a1a1a;
+  --bg-card: #000000; /* Black cards */
+  --bg-input: #1a1a1a;
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-muted: #b0b0b0;
+  --border-default: #f59e0b; /* Lighter tiger orange for borders */
+  --border-strong: #fbbf24; /* Even lighter tiger orange for strong borders */
+  --accent: #fcd34d; /* Light tiger orange for accents */
+  --accent-hover: #fde68a; /* Lighter tiger orange on hover */
+  --error: #ff6b6b;
+  --overlay-bg: rgba(0, 0, 0, 0.7);
+  --icon-filter: invert(1);
+}
+
 html,
 body {
   height: 100%;

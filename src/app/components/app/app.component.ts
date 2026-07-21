@@ -20,7 +20,7 @@ import { IconBrowserComponent } from '../icon-browser/icon-browser.component';
  * - Docker containerization support
  * - Desktop app packaging via Electron
  */
-type ThemeMode = 'light' | 'dark' | 'mallard' | 'mallard-dark' | 'mallard-accent';
+type ThemeMode = 'light' | 'dark' | 'mallard' | 'mallard-dark' | 'mallard-accent' | 'tiger' | 'tiger-dark' | 'tiger-accent';
 
 @Component({
   selector: 'app-root',
@@ -40,6 +40,9 @@ type ThemeMode = 'light' | 'dark' | 'mallard' | 'mallard-dark' | 'mallard-accent
             <option value="mallard">Mallard</option>
             <option value="mallard-dark">Mallard Dark</option>
             <option value="mallard-accent">Mallard Accent</option>
+            <option value="tiger">Tiger</option>
+            <option value="tiger-dark">Tiger Dark</option>
+            <option value="tiger-accent">Tiger Accent</option>
           </select>
         </div>
       </header>

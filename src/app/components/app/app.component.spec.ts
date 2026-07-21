@@ -192,4 +192,49 @@ describe('AppComponent', () => {
     expect(window.localStorage.getItem(themeStorageKey)).toBe('mallard-accent');
     expect(document.documentElement.getAttribute('data-theme')).toBe('mallard-accent');
   });
+
+  it('supports Tiger theme selection and persistence', async () => {
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const selector = fixture.nativeElement.querySelector('.theme-selector') as HTMLSelectElement;
+    selector.value = 'tiger';
+    selector.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.theme).toBe('tiger');
+    expect(window.localStorage.getItem(themeStorageKey)).toBe('tiger');
+    expect(document.documentElement.getAttribute('data-theme')).toBe('tiger');
+  });
+
+  it('supports Tiger Dark theme selection and persistence', async () => {
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const selector = fixture.nativeElement.querySelector('.theme-selector') as HTMLSelectElement;
+    selector.value = 'tiger-dark';
+    selector.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.theme).toBe('tiger-dark');
+    expect(window.localStorage.getItem(themeStorageKey)).toBe('tiger-dark');
+    expect(document.documentElement.getAttribute('data-theme')).toBe('tiger-dark');
+  });
+
+  it('supports Tiger Accent theme selection and persistence', async () => {
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const selector = fixture.nativeElement.querySelector('.theme-selector') as HTMLSelectElement;
+    selector.value = 'tiger-accent';
+    selector.dispatchEvent(new Event('change'));
+    fixture.detectChanges();
+
+    expect(fixture.componentInstance.theme).toBe('tiger-accent');
+    expect(window.localStorage.getItem(themeStorageKey)).toBe('tiger-accent');
+    expect(document.documentElement.getAttribute('data-theme')).toBe('tiger-accent');
+  });
 });
