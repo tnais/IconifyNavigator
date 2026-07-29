@@ -113,6 +113,7 @@ interface IconTagDialogState {
               id="icn.color"
               type="text"
               placeholder="color"
+              style="width: 90%"
             />
             <input
               [ngModel]="tagDialog.width"
@@ -120,6 +121,7 @@ interface IconTagDialogState {
               id="icn.width"
               type="text"
               placeholder="width"
+              style="width: 90%"
             />
             <input
               [ngModel]="tagDialog.height"
@@ -127,11 +129,13 @@ interface IconTagDialogState {
               id="icn.height"
               type="text"
               placeholder="height"
+              style="width: 90%"
             />
             <select
               [ngModel]="tagDialog.flip"
               (ngModelChange)="onDialogFieldChange('flip', $event)"
               id="icn.flip"
+              style="width: 90%"
             >
               <option value=""></option>
               <option value="horizontal">horizontal</option>
@@ -141,6 +145,7 @@ interface IconTagDialogState {
               [ngModel]="tagDialog.rotate"
               (ngModelChange)="onDialogFieldChange('rotate', $event)"
               id="icn.rotate"
+              style="width: 90%"
             >
               <option value=""></option>
               <option value="90">90</option>
