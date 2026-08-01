@@ -33,11 +33,12 @@ COPY --from=builder /app/src/assets/favicon.png ./dist/assets/favicon.png
 COPY --from=builder /app/src/iconify-server.txt ./dist
 
 # Expose default port
-EXPOSE 3000
+# This value should never been changed from 4200
+EXPOSE 4200
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
-  CMD node -e "require('http').get('http://localhost:3000', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"
+  CMD node -e "require('http').get('http://localhost:4200', (r) => {if (r.statusCode !== 200) throw new Error(r.statusCode)})"
 
 # Run the web server
-CMD ["serve", "-s", "dist", "-l", "3000"]
+CMD ["serve", "-s", "dist", "-l", "4200"]
