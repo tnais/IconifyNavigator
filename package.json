@@ -65,8 +65,10 @@
     "files": [
       "desktop/**/*",
       "dist/iconifynavigator/**/*",
+      "icons/**/*",
       "package.json"
     ],
+    "icon": "icons/Diagram2.png",
     "win": {
       "target": [
         "portable"

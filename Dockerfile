@@ -28,6 +28,7 @@ RUN npm install -g serve
 
 # Copy only built artifacts
 COPY --from=builder /app/dist/iconifynavigator ./dist
+COPY --from=builder /app/src/assets/favicon.png ./dist/assets/favicon.png
 #COPY --from=builder /app/src/iconify-server.txt ./dist/ 2>/dev/null || true
 COPY --from=builder /app/src/iconify-server.txt ./dist
 
