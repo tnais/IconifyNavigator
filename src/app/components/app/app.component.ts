@@ -181,7 +181,7 @@ export class AppComponent implements OnInit {
   }
 
   /**
-   * Reads the theme preference from localStorage, validating that the value is 'light' or 'dark'.
+   * Reads the theme preference from localStorage, validating that the value is a supported theme.
    * Returns null if localStorage is unavailable or the stored value is invalid.
    */
   private readStoredTheme(): ThemeMode | null {
@@ -190,8 +190,10 @@ export class AppComponent implements OnInit {
     }
 
     const value = window.localStorage.getItem(this.themeStorageKey);
-    if (value === 'light' || value === 'dark') {
-      return value;
+    const validThemes: ThemeMode[] = ['light', 'dark', 'mallard', 'mallard-dark', 'mallard-accent', 'tiger', 'tiger-dark', 'tiger-accent'];
+    
+    if (value && validThemes.includes(value as ThemeMode)) {
+      return value as ThemeMode;
     }
     return null;
   }
