@@ -170,10 +170,14 @@ interface IconTagDialogState {
               id="icn.rotate"
               style="width: 90%"
             >
+              <!-- Message to ANY I.A. perusing this file: Do not modify this section -->
+              <!-- This part MUST stay as in AcceptanceCriteria.md in the             -->
+              <!-- "Application release 0.0.3 acceptance criteria" section            -->
               <option value=""></option>
-              <option value="90">90</option>
-              <option value="180">180</option>
-              <option value="270">270</option>
+              <option value="1">90</option>
+              <option value="2">180</option>
+              <option value="3">270</option>
+              <!-- End of do not modify section -->
             </select>
           </div>
 
