@@ -12,6 +12,7 @@ interface IconTagDialogState {
   height: string;
   flip: '' | 'horizontal' | 'vertical';
   rotate: '' | '90' | '180' | '270';
+  testBg: string;
 }
 
 /**
@@ -181,9 +182,18 @@ interface IconTagDialogState {
             </select>
           </div>
 
+          <textarea
+            [ngModel]="tagDialog.testBg"
+            (ngModelChange)="onTestBgChange($event)"
+            id="icn.test-bg"
+            placeholder="preview background color (hex)"
+            [style.background]="'var(--bg-page)'"
+            class="test-bg-textarea"
+          ></textarea>
+
           <div class="dialog-preview-row">
             <textarea id="icn.tagstring" readonly [value]="tagString"></textarea>
-            <div class="preview-square" aria-label="Icon preview">
+            <div class="preview-square" aria-label="Icon preview" [style.background]="previewSquareBg">
               <img *ngIf="tagPreviewSrc" [src]="tagPreviewSrc" [alt]="selectedIcon?.name || 'icon preview'" class="preview-img" />
             </div>
           </div>
@@ -343,9 +353,10 @@ interface IconTagDialogState {
         justify-content: center;
         z-index: 1000;
       }
+      /* Do not touch the background value */
       .dialog {
         width: min(760px, 96vw);
-        background: var(--bg-surface);
+        background: var(--bg-page);
         border-radius: 8px;
         border: 1px solid var(--border-default);
         padding: 16px;
@@ -378,6 +389,17 @@ interface IconTagDialogState {
         font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         box-sizing: border-box;
       }
+      .test-bg-textarea {
+        width: 100%;
+        height: 48px;
+        resize: none;
+        padding: 8px;
+        border: 1px solid var(--border-strong);
+        border-radius: 4px;
+        color: var(--text-primary);
+        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+        box-sizing: border-box;
+      }
       .dialog-preview-row {
         display: grid;
         grid-template-columns: minmax(0, 1fr) 96px;
@@ -389,7 +411,7 @@ interface IconTagDialogState {
         height: 96px;
         border: 1px solid var(--border-strong);
         border-radius: 4px;
-        background: var(--bg-input);
+        background: var(--bg-page);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -453,6 +475,9 @@ export class IconBrowserComponent {
   tagString = '';
   /** URL used by both the generated tag and the live preview image. */
   tagPreviewSrc = '';
+
+  /** Current background color of the preview square. */
+  previewSquareBg = 'var(--bg-input)';
 
   /** True when there are still unrendered icons left for the opened collection. */
   get hasMoreCollectionIcons(): boolean {
@@ -584,6 +609,7 @@ export class IconBrowserComponent {
     this.tagDialog = this.createInitialDialogState();
     this.tagString = '';
     this.tagPreviewSrc = '';
+    this.previewSquareBg = 'var(--bg-input)';
     this.cdr.detectChanges();
   }
 
@@ -594,6 +620,17 @@ export class IconBrowserComponent {
       [field]: value
     };
     this.updateTagString();
+  }
+
+  /** Updates the preview square background color when the test-bg textarea changes. */
+  onTestBgChange(value: string): void {
+    this.tagDialog = {
+      ...this.tagDialog,
+      testBg: value
+    };
+    const trimmed = value.trim();
+    this.previewSquareBg = trimmed.length > 0 ? trimmed : 'var(--bg-input)';
+    this.cdr.detectChanges();
   }
 
   /** Copies the generated tag string to the clipboard. */
@@ -658,7 +695,8 @@ export class IconBrowserComponent {
       width: '',
       height: '',
       flip: '',
-      rotate: ''
+      rotate: '',
+      testBg: ''
     };
   }
 }
