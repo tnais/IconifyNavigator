@@ -135,9 +135,8 @@ interface IconTagDialogState {
               [ngModel]="tagDialog.color"
               (ngModelChange)="onDialogFieldChange('color', $event)"
               id="icn.color"
-              type="text"
-              placeholder="color"
-              style="width: 90%"
+              type="color"
+              style="width: 90%; cursor: pointer;"
             />
             <input
               [ngModel]="tagDialog.width"
@@ -180,16 +179,17 @@ interface IconTagDialogState {
               <option value="3">270</option>
               <!-- End of do not modify section -->
             </select>
+
+            <input
+             type="color"
+             [ngModel]="tagDialog.testBg"
+             (ngModelChange)="onTestBgChange($event)"
+             id="icn.test-bg"
+             style="width: 90%; cursor: pointer;"
+            />
+
           </div>
 
-          <textarea
-            [ngModel]="tagDialog.testBg"
-            (ngModelChange)="onTestBgChange($event)"
-            id="icn.test-bg"
-            placeholder="preview background color (hex)"
-            [style.background]="'var(--bg-page)'"
-            class="test-bg-textarea"
-          ></textarea>
 
           <div class="dialog-preview-row">
             <textarea id="icn.tagstring" readonly [value]="tagString"></textarea>
@@ -385,17 +385,6 @@ interface IconTagDialogState {
         border: 1px solid var(--border-strong);
         border-radius: 4px;
         background: var(--bg-input);
-        color: var(--text-primary);
-        font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-        box-sizing: border-box;
-      }
-      .test-bg-textarea {
-        width: 100%;
-        height: 48px;
-        resize: none;
-        padding: 8px;
-        border: 1px solid var(--border-strong);
-        border-radius: 4px;
         color: var(--text-primary);
         font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
         box-sizing: border-box;
@@ -686,17 +675,67 @@ export class IconBrowserComponent {
   }
 
   /**
-   * Creates a fresh IconTagDialogState with all fields initialized to empty strings.
-   * Used when opening the dialog or resetting it after closing.
+   * Creates a fresh IconTagDialogState with all fields initialized.
+   * color: black (#000000)
+   * testBg: current preview background color
+   * Other fields: empty strings
    */
   private createInitialDialogState(): IconTagDialogState {
     return {
-      color: '',
+      color: '#000000',
       width: '',
       height: '',
       flip: '',
       rotate: '',
-      testBg: ''
+      testBg: this.getComputedBgColor()
     };
+  }
+
+  /**
+   * Gets the computed hex color of the preview-square background (--bg-input CSS variable).
+   */
+  private getComputedBgColor(): string {
+    const root = document.documentElement;
+    const computedColor = getComputedStyle(root).getPropertyValue('--bg-input').trim();
+    if (!computedColor) {
+      return '#ffffff';
+    }
+    return this.rgbToHex(computedColor);
+  }
+
+  /**
+   * Converts a CSS color (hex, rgb, or color name) to hex format.
+   */
+  private rgbToHex(color: string): string {
+    // If already in hex format, return as-is
+    if (color.startsWith('#')) {
+      return color;
+    }
+
+    // Handle rgb() format
+    const rgbMatch = color.match(/rgb\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/);
+    if (rgbMatch) {
+      const r = parseInt(rgbMatch[1], 10).toString(16).padStart(2, '0');
+      const g = parseInt(rgbMatch[2], 10).toString(16).padStart(2, '0');
+      const b = parseInt(rgbMatch[3], 10).toString(16).padStart(2, '0');
+      return `#${r}${g}${b}`;
+    }
+
+    // Fallback: create a temporary element to compute the color
+    const elem = document.createElement('div');
+    elem.style.color = color;
+    document.body.appendChild(elem);
+    const computed = getComputedStyle(elem).color;
+    document.body.removeChild(elem);
+
+    const match = computed.match(/rgb\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/);
+    if (match) {
+      const r = parseInt(match[1], 10).toString(16).padStart(2, '0');
+      const g = parseInt(match[2], 10).toString(16).padStart(2, '0');
+      const b = parseInt(match[3], 10).toString(16).padStart(2, '0');
+      return `#${r}${g}${b}`;
+    }
+
+    return '#ffffff';
   }
 }

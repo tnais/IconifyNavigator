@@ -201,7 +201,7 @@ describe('IconBrowserComponent', () => {
     const flipSelect = fixture.nativeElement.querySelector('[id="icn.flip"]') as HTMLSelectElement;
     const tagText = fixture.nativeElement.querySelector('[id="icn.tagstring"]') as HTMLTextAreaElement;
 
-    colorInput.value = 'red blue';
+    colorInput.value = '#ff0000';
     colorInput.dispatchEvent(new Event('input'));
     widthInput.value = '24';
     widthInput.dispatchEvent(new Event('input'));
@@ -210,7 +210,7 @@ describe('IconBrowserComponent', () => {
     fixture.detectChanges();
 
     expect(tagText.value).toContain('<img src="https://api.iconify.design/mdi/home.svg?');
-    expect(tagText.value).toContain('color=red%20blue');
+    expect(tagText.value).toContain('color=%23ff0000');
     expect(tagText.value).toContain('width=24');
     expect(tagText.value).toContain('flip=horizontal');
   });

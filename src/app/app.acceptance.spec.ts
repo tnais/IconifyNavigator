@@ -262,7 +262,7 @@ describe('Acceptance criteria 0.0.3', () => {
     const flipSelect = fixture.nativeElement.querySelector('[id="icn.flip"]') as HTMLSelectElement;
     const tagText = fixture.nativeElement.querySelector('[id="icn.tagstring"]') as HTMLTextAreaElement;
 
-    colorInput.value = 'blue';
+    colorInput.value = '#0000ff';
     colorInput.dispatchEvent(new Event('input'));
     widthInput.value = '32';
     widthInput.dispatchEvent(new Event('input'));
@@ -271,7 +271,7 @@ describe('Acceptance criteria 0.0.3', () => {
     fixture.detectChanges();
 
     expect(tagText.value).toContain('<img src="https://api.iconify.design/mdi/home.svg?');
-    expect(tagText.value).toContain('color=blue');
+    expect(tagText.value).toContain('color=%230000ff');
     expect(tagText.value).toContain('width=32');
     expect(tagText.value).toContain('flip=vertical');
     expect(fixture.nativeElement.textContent).toContain('copy');
