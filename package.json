@@ -14,7 +14,6 @@
   "license": "GPL-3.0-or-later",
   "author": "Saint",
   "type": "commonjs",
-  "main": "desktop/main.js",
   "scripts": {
     "build": "ng build",
     "server": "ng serve",
@@ -22,10 +21,6 @@
     "serve:react": "npm run dev --prefix react-app",
     "start": "node -e \"require('http').createServer((req,res)=>{const url=require('url').parse(req.url);if(url.pathname==='/'||url.pathname.endsWith('.html'))url.pathname='/index.html';const fs=require('fs'),path=require('path'),file=require('path').join('./dist',url.pathname);try{res.end(fs.readFileSync(file))}catch(e){res.statusCode=404;res.end('Not Found')}}).listen(3000,'0.0.0.0')\" || npx serve -s dist -l 3000",
     "start:serve": "npx serve -s dist -l 3000",
-    "desktop:start": "npm run build -- --configuration production && electron .",
-    "desktop:package:win": "npm run build -- --configuration production && electron-builder --win portable",
-    "desktop:package:linux": "npm run build -- --configuration production && electron-builder --linux zip",
-    "desktop:package:all": "npm run build -- --configuration production && electron-builder --win portable --linux zip",
     "test": "jest",
     "test:robot": "robot --outputdir robot/results/angular robot/tests/",
     "test:robot:react": "robot --variable APP_URL:http://localhost:4300 --outputdir robot/results/react robot/tests/"
@@ -48,38 +43,11 @@
     "@angular/compiler-cli": "21.2.18",
     "@types/jest": "30.0.0",
     "@types/node": "26.1.1",
-    "electron": "31.7.7",
-    "electron-builder": "^26.15.3",
     "jest": "30.4.2",
     "jest-environment-jsdom": "30.4.1",
     "jest-preset-angular": "17.0.0",
     "tar": "^7.5.22",
     "ts-jest": "29.4.11",
     "typescript": "5.9.3"
-  },
-  "build": {
-    "appId": "com.iconifynavigator.desktop",
-    "productName": "IconifyNavigator",
-    "directories": {
-      "output": "dist-desktop"
-    },
-    "files": [
-      "desktop/**/*",
-      "dist/iconifynavigator/**/*",
-      "icons/**/*",
-      "package.json"
-    ],
-    "icon": "icons/Diagram2.png",
-    "win": {
-      "target": [
-        "portable"
-      ]
-    },
-    "linux": {
-      "target": [
-        "zip"
-      ],
-      "category": "Utility"
-    }
   }
 }
