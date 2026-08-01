@@ -4,8 +4,6 @@ schema-version = "0.2"
 [build]
 include-files = [
   "src/**/*",
-  "react-app/**/*",
-  "desktop/**/*",
   "angular.json",
   "tsconfig*.json",
   "jest.config.js",
