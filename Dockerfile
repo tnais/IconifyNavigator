@@ -14,9 +14,6 @@ RUN npm ci
 # Copy source code
 COPY angular.json tsconfig*.json jest.config.js setup-jest.ts ./
 COPY src ./src
-COPY desktop ./desktop
-COPY react-app ./react-app
-# COPY public ./public ## allucinazione
 
 # Build the Angular app
 RUN npm run build -- --configuration production
