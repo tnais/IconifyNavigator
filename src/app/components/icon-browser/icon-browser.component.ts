@@ -389,7 +389,7 @@ interface IconTagDialogState {
         height: 96px;
         border: 1px solid var(--border-strong);
         border-radius: 4px;
-        background: #ffffff;
+        background: var(--bg-input);
         display: flex;
         align-items: center;
         justify-content: center;
