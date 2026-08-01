@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
+import { of, NEVER } from 'rxjs';
 import { IconBrowserComponent } from './icon-browser.component';
 import { IconifyService } from '../../services/iconify.service';
 
@@ -11,6 +11,7 @@ describe('IconBrowserComponent', () => {
     getCollectionIcons: jest.Mock;
     getIconUrl: jest.Mock;
     getServerUrl: jest.Mock;
+    getSearchProgress: jest.Mock;
   };
 
   const mdi = {
@@ -60,7 +61,8 @@ describe('IconBrowserComponent', () => {
         ])
       ),
       getIconUrl: jest.fn().mockReturnValue('https://api.iconify.design/mdi/home.svg'),
-      getServerUrl: jest.fn().mockReturnValue('https://api.iconify.design')
+      getServerUrl: jest.fn().mockReturnValue('https://api.iconify.design'),
+      getSearchProgress: jest.fn().mockReturnValue(NEVER) // Never emits progress in tests
     };
 
     await TestBed.configureTestingModule({

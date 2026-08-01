@@ -122,4 +122,35 @@ describe('IconifyService', () => {
     const collections = await firstValueFrom(service.getCollections());
     expect(collections.map((c) => c.prefix)).toEqual(['mdi']);
   });
+
+  it('loads ALL collections when doing a generic search (issue #1 fix)', async () => {
+    const initPromise = service.initialize();
+    httpMock.expectOne('iconify-server.txt').flush('https://api.iconify.design');
+    await Promise.resolve();
+    httpMock.expectOne('https://api.iconify.design/collections').flush({
+      mdi: { name: 'Material Design Icons' },
+      tabler: { name: 'Tabler Icons' },
+      feather: { name: 'Feather Icons' }
+    });
+    await initPromise;
+
+    const resultPromise = firstValueFrom(service.searchIcons({ name: 'home' }));
+
+    // Verify that ALL collections are loaded (not just the first 6)
+    httpMock.expectOne('https://api.iconify.design/collection?prefix=mdi').flush({
+      icons: { home: {}, 'home-outline': {} }
+    });
+    httpMock.expectOne('https://api.iconify.design/collection?prefix=tabler').flush({
+      icons: { home: {} }
+    });
+    httpMock.expectOne('https://api.iconify.design/collection?prefix=feather').flush({
+      icons: { 'home-alt': {} }
+    });
+
+    const result = await resultPromise;
+
+    // All three collections should be searched
+    expect(result.total).toBe(4); // home, home-outline, home (tabler), home-alt
+    expect(result.icons.map((icon) => icon.collection).sort()).toEqual(['feather', 'mdi', 'mdi', 'tabler']);
+  });
 });

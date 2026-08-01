@@ -6,15 +6,15 @@
  * Responsibilities:
  * - Manage Iconify server URL configuration
  * - Fetch and cache icon collections
- * - Search icons across collections
+ * - Search icons across collections with progress tracking
  * - Build URLs for icon requests with parameters
  * - Handle timeouts and errors
  */
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, firstValueFrom, from, of } from 'rxjs';
+import { BehaviorSubject, Observable, firstValueFrom, from, of, Subject } from 'rxjs';
 import { map, timeout } from 'rxjs/operators';
-import { Icon, IconCollection, IconSearchOptions, SearchResult } from '../models/icon.model';
+import { Icon, IconCollection, IconSearchOptions, SearchResult, SearchProgress } from '../models/icon.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +25,9 @@ export class IconifyService {
 
   /** In-memory cache of all known collections, populated once during initialize(). */
   private readonly collectionsCache$ = new BehaviorSubject<IconCollection[]>([]);
+
+  /** Subject that emits search progress updates as collections are loaded during search. */
+  private readonly searchProgress$ = new Subject<SearchProgress>();
 
   /** Maximum number of collections whose icons are loaded simultaneously during a search. */
   private readonly maxCollectionsToLoad = 6;
@@ -75,9 +78,15 @@ export class IconifyService {
     return from(this.loadCollectionsMetadata()).pipe(map(() => this.collectionsCache$.value));
   }
 
+  /** Emits search progress updates (loading collections, matching icons found, etc.). */
+  getSearchProgress(): Observable<SearchProgress> {
+    return this.searchProgress$.asObservable();
+  }
+
   /**
    * Searches icons across a batch of pre-loaded collections using in-memory filtering.
    * Matches against name, category, and tags according to the supplied options.
+   * Emits progress updates via getSearchProgress() observable.
    */
   searchIcons(options: IconSearchOptions): Observable<SearchResult> {
     return from(this.searchIconsInternal(options));
@@ -182,15 +191,90 @@ export class IconifyService {
     return collections;
   }
 
-  /** Ensures metadata is loaded, then delegates to the in-memory search. */
+  /** Ensures metadata is loaded, then delegates to the in-memory search with progress tracking. */
   private async searchIconsInternal(options: IconSearchOptions): Promise<SearchResult> {
-    const collections = await this.ensureSearchCollectionsLoaded(options);
+    const collections = await this.ensureSearchCollectionsLoadedWithProgress(options);
     return this.performSearch(collections, options);
   }
 
   /**
-   * Loads up to maxCollectionsToLoad collections that have not yet been fetched.
-   * This batched pre-loading strategy makes the first text search feel instant.
+   * Loads collections while emitting progress updates to indicate search status.
+   * Shows user which collection is being loaded and how many have been processed.
+   */
+  private async ensureSearchCollectionsLoadedWithProgress(options?: IconSearchOptions): Promise<IconCollection[]> {
+    if (this.collectionsCache$.value.length === 0) {
+      await this.loadCollectionsMetadata();
+    }
+
+    const current = this.collectionsCache$.value;
+    const collectionNameQuery = options?.collectionName?.trim().toLowerCase();
+    let prefixesToLoad: string[] = [];
+
+    if (collectionNameQuery) {
+      prefixesToLoad = current
+        .filter(
+          (collection) =>
+            collection.name.toLowerCase().includes(collectionNameQuery) ||
+            collection.prefix.toLowerCase().includes(collectionNameQuery)
+        )
+        .filter((collection) => !this.loadedPrefixes.has(collection.prefix))
+        .map((collection) => collection.prefix);
+    } else {
+      // For generic searches, load ALL collections
+      prefixesToLoad = current
+        .filter((collection) => !this.loadedPrefixes.has(collection.prefix))
+        .map((collection) => collection.prefix);
+    }
+
+    if (prefixesToLoad.length === 0) {
+      return current;
+    }
+
+    // Emit initial progress
+    this.searchProgress$.next({
+      totalCollections: prefixesToLoad.length,
+      loadedCollections: 0,
+      matchedIcons: 0,
+      complete: false
+    });
+
+    // Load all prefixes and emit progress for each
+    const loadedCollections = await Promise.all(
+      prefixesToLoad.map(async (prefix, index) => {
+        const collection = await this.loadCollection(prefix);
+        
+        // Emit progress after each collection is loaded
+        this.searchProgress$.next({
+          totalCollections: prefixesToLoad.length,
+          loadedCollections: index + 1,
+          currentCollection: collection.name,
+          matchedIcons: collection.icons.length,
+          complete: index + 1 === prefixesToLoad.length
+        });
+
+        return collection;
+      })
+    );
+
+    const loadedByPrefix = new Map(loadedCollections.map((collection) => [collection.prefix, collection]));
+    const merged = current.map((collection) => loadedByPrefix.get(collection.prefix) || collection);
+
+    merged.forEach((collection) => {
+      if (collection.icons.length > 0) {
+        this.loadedPrefixes.add(collection.prefix);
+      }
+    });
+
+    this.collectionsCache$.next(merged);
+    return merged;
+  }
+
+  /**
+   * Loads collections based on search options to ensure comprehensive search results.
+   * - If searching by collection name: loads only matching collections
+   * - If doing a generic search: loads ALL collections to ensure no results are missed
+   * Note: Results are cached after loading, so subsequent searches are instant.
+   * This is retained as fallback; use ensureSearchCollectionsLoadedWithProgress for actual searches.
    */
   private async ensureSearchCollectionsLoaded(options?: IconSearchOptions): Promise<IconCollection[]> {
     if (this.collectionsCache$.value.length === 0) {
@@ -227,9 +311,10 @@ export class IconifyService {
       return merged;
     }
 
+    // For generic searches (no collection name filter), load ALL collections to ensure complete results.
+    // Load unloaded collections in batches to avoid overwhelming the server.
     const prefixesToLoad = current
       .filter((collection) => !this.loadedPrefixes.has(collection.prefix))
-      .slice(0, this.maxCollectionsToLoad)
       .map((collection) => collection.prefix);
 
     if (prefixesToLoad.length === 0) {

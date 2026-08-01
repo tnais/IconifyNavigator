@@ -1,8 +1,8 @@
-import { Component, Input, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, ChangeDetectorRef, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IconifyService } from '../../services/iconify.service';
-import { Icon, IconCollection, IconSearchOptions } from '../../models/icon.model';
+import { Icon, IconCollection, IconSearchOptions, SearchProgress } from '../../models/icon.model';
 import { IconSearchComponent } from '../icon-search/icon-search.component';
 import { CollectionCardComponent } from '../collection-card/collection-card.component';
 
@@ -85,9 +85,32 @@ interface IconTagDialogState {
         <!-- Search results (shown when the user has searched but no collection is open) -->
         <section *ngIf="!openedCollection && searched">
           <h2>Search Results</h2>
-          <p *ngIf="loading">Searching...</p>
+          
+          <!-- Progress indicator during search -->
+          <div *ngIf="loading && searchProgress" class="search-progress">
+            <div class="progress-header">
+              <span class="progress-text">
+                Searching... ({{ searchProgress.loadedCollections }} / {{ searchProgress.totalCollections }} collections)
+              </span>
+              <span *ngIf="searchProgress.currentCollection" class="progress-collection">
+                {{ searchProgress.currentCollection }}
+              </span>
+            </div>
+            <div class="progress-bar">
+              <div class="progress-fill" [style.width.%]="(searchProgress.loadedCollections / searchProgress.totalCollections) * 100"></div>
+            </div>
+          </div>
+
+          <!-- Simple loading message for quick searches -->
+          <p *ngIf="loading && !searchProgress" class="searching-text">Searching...</p>
+
+          <!-- Error message if search failed -->
           <p *ngIf="error" class="error">{{ error }}</p>
-          <p *ngIf="!loading">Found {{ icons.length }} icon(s)</p>
+
+          <!-- Results summary -->
+          <p *ngIf="!loading" class="results-summary">Found {{ icons.length }} icon(s)</p>
+
+          <!-- Icon grid -->
           <div class="grid" *ngIf="icons.length > 0">
             <article class="card icon-clickable" *ngFor="let icon of icons" (click)="openIconDialog(icon)">
               <div class="icon-preview">
@@ -254,6 +277,59 @@ interface IconTagDialogState {
         margin: 12px 0 0;
         text-align: center;
       }
+      /* Search progress indicator */
+      .search-progress {
+        background: var(--bg-surface-muted);
+        border: 1px solid var(--border-default);
+        border-radius: 6px;
+        padding: 12px;
+        margin-bottom: 16px;
+      }
+      .progress-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+        gap: 8px;
+      }
+      .progress-text {
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+      .progress-collection {
+        font-size: 0.75rem;
+        color: var(--text-secondary);
+        padding: 2px 6px;
+        background: var(--bg-input);
+        border-radius: 3px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        max-width: 40%;
+      }
+      .progress-bar {
+        width: 100%;
+        height: 8px;
+        background: var(--border-default);
+        border-radius: 4px;
+        overflow: hidden;
+      }
+      .progress-fill {
+        height: 100%;
+        background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary, var(--accent-primary)));
+        border-radius: 4px;
+        transition: width 0.2s ease-out;
+      }
+      .searching-text {
+        color: var(--text-secondary);
+        font-style: italic;
+        margin-bottom: 12px;
+      }
+      .results-summary {
+        color: var(--text-secondary);
+        margin-bottom: 12px;
+      }
       .dialog-backdrop {
         position: fixed;
         inset: 0;
@@ -360,6 +436,9 @@ export class IconBrowserComponent {
   /** Error message when the most recent search or open failed; null otherwise. */
   error: string | null = null;
 
+  /** Search progress information during an active search. */
+  searchProgress: SearchProgress | null = null;
+
   /** Selected icon for tag generation; null means dialog is closed. */
   selectedIcon: Icon | null = null;
 
@@ -377,6 +456,14 @@ export class IconBrowserComponent {
   }
 
   constructor(private iconifyService: IconifyService, private cdr: ChangeDetectorRef) {}
+
+  ngOnInit(): void {
+    // Subscribe to search progress updates
+    this.iconifyService.getSearchProgress().subscribe((progress) => {
+      this.searchProgress = progress;
+      this.cdr.detectChanges();
+    });
+  }
 
   /** Returns the Iconify SVG render URL for a given icon. */
   getIconUrl(icon: Icon): string {

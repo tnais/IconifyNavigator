@@ -62,6 +62,24 @@ export interface IconSearchOptions {
   tags?: string[];
 }
 
+/** Progress information during an active search. Emitted as collections are loaded. */
+export interface SearchProgress {
+  /** Total number of collections to search. */
+  totalCollections: number;
+
+  /** Number of collections that have been loaded and searched so far. */
+  loadedCollections: number;
+
+  /** Name of the collection currently being loaded/searched. */
+  currentCollection?: string;
+
+  /** Number of matching icons found so far. */
+  matchedIcons: number;
+
+  /** Indicates whether all collections have been processed. */
+  complete: boolean;
+}
+
 /** The result object returned by a search operation. */
 export interface SearchResult {
   /** Filtered list of icons matching the search criteria. */

@@ -76,7 +76,8 @@ function buildServiceMock() {
     getIconUrl: jest.fn().mockImplementation(
       (prefix: string, name: string) => `https://api.iconify.design/${prefix}/${name}.svg`
     ),
-    getServerUrl: jest.fn().mockReturnValue('https://api.iconify.design')
+    getServerUrl: jest.fn().mockReturnValue('https://api.iconify.design'),
+    getSearchProgress: jest.fn().mockReturnValue(of()) // Mock returns empty observable
   };
 }
 
