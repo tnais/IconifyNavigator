@@ -239,25 +239,13 @@ export class IconifyService {
     });
 
     let loadedCollectionsCount = 0;
-    const loadedCollections: IconCollection[] = [];
-
-    for (let index = 0; index < prefixesToLoad.length; index += this.maxCollectionsToLoad) {
-      const batch = prefixesToLoad.slice(index, index + this.maxCollectionsToLoad);
-      const results = await Promise.allSettled(batch.map((prefix) => this.loadCollection(prefix)));
-
-      results.forEach((result, batchIndex) => {
-        const prefix = batch[batchIndex];
+    const loadedCollections = await this.loadCollectionsInBatches(prefixesToLoad, {
+      onRejected: (prefix, error) => {
+        console.error('[IconifyService] Failed to load collection during search:', { prefix, error });
+      },
+      onSettled: (prefix, result) => {
         const metadata = current.find((collection) => collection.prefix === prefix);
         loadedCollectionsCount += 1;
-
-        if (result.status === 'fulfilled') {
-          loadedCollections.push(result.value);
-        } else {
-          console.error('[IconifyService] Failed to load collection during search:', {
-            prefix,
-            error: result.reason
-          });
-        }
 
         this.searchProgress$.next({
           totalCollections: prefixesToLoad.length,
@@ -266,8 +254,8 @@ export class IconifyService {
           matchedIcons: result.status === 'fulfilled' ? result.value.icons.length : 0,
           complete: loadedCollectionsCount === prefixesToLoad.length
         });
-      });
-    }
+      }
+    });
 
     const loadedByPrefix = new Map(loadedCollections.map((collection) => [collection.prefix, collection]));
     const merged = current.map((collection) => loadedByPrefix.get(collection.prefix) || collection);
@@ -443,22 +431,34 @@ export class IconifyService {
   }
 
   /** Loads collections in bounded batches to avoid overwhelming slower Iconify servers. */
-  private async loadCollectionsInBatches(prefixes: string[]): Promise<IconCollection[]> {
+  private async loadCollectionsInBatches(
+    prefixes: string[],
+    handlers?: {
+      onRejected?: (prefix: string, error: unknown) => void;
+      onSettled?: (prefix: string, result: PromiseSettledResult<IconCollection>) => void;
+    }
+  ): Promise<IconCollection[]> {
     const loaded: IconCollection[] = [];
 
     for (let index = 0; index < prefixes.length; index += this.maxCollectionsToLoad) {
       const batch = prefixes.slice(index, index + this.maxCollectionsToLoad);
       const results = await Promise.allSettled(batch.map((prefix) => this.loadCollection(prefix)));
       results.forEach((result, batchIndex) => {
+        const prefix = batch[batchIndex];
         if (result.status === 'fulfilled') {
           loaded.push(result.value);
-          return;
+        } else {
+          if (handlers?.onRejected) {
+            handlers.onRejected(prefix, result.reason);
+          } else {
+            console.error('[IconifyService] Failed to load collection during batched load:', {
+              prefix,
+              error: result.reason
+            });
+          }
         }
 
-        console.error('[IconifyService] Failed to load collection during batched load:', {
-          prefix: batch[batchIndex],
-          error: result.reason
-        });
+        handlers?.onSettled?.(prefix, result);
       });
     }
 

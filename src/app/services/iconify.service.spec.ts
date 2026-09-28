@@ -4,6 +4,12 @@ import { firstValueFrom } from 'rxjs';
 import { IconCollection, SearchResult } from '../models/icon.model';
 import { IconifyService } from './iconify.service';
 
+async function flushMicrotasks(times = 1): Promise<void> {
+  for (let index = 0; index < times; index += 1) {
+    await Promise.resolve();
+  }
+}
+
 describe('IconifyService', () => {
   let service: IconifyService;
   let httpMock: HttpTestingController;
@@ -184,13 +190,9 @@ describe('IconifyService', () => {
       });
     });
 
-    await new Promise<void>((resolve) => {
-      setTimeout(() => {
-        httpMock.expectOne('https://api.iconify.design/collection?prefix=g').flush({
-          icons: { 'home-7': {} }
-        });
-        resolve();
-      }, 0);
+    await flushMicrotasks(3);
+    httpMock.expectOne('https://api.iconify.design/collection?prefix=g').flush({
+      icons: { 'home-7': {} }
     });
 
     const result = await resultPromise;
