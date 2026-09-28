@@ -141,6 +141,7 @@ export class AppComponent implements OnInit {
       this.collections = await firstValueFrom(this.iconifyService.getCollections());
       this.error = null;
     } catch (error: any) {
+      console.error('[AppComponent] Initialization failed:', error);
       this.error = error?.message || 'Initialization failed';
     } finally {
       this.loading = false;

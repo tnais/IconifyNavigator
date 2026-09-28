@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 import { CollectionCardComponent } from './collection-card.component';
 import { IconifyService } from '../../services/iconify.service';
 
@@ -41,6 +41,10 @@ describe('CollectionCardComponent', () => {
     fixture.detectChanges();
   });
 
+  afterEach(() => {
+    jest.restoreAllMocks();
+  });
+
   it('renders collection name, category and tags', () => {
     const text = fixture.nativeElement.textContent;
     expect(text).toContain('Name:');
@@ -76,5 +80,27 @@ describe('CollectionCardComponent', () => {
 
     fixture.nativeElement.querySelector('.open-button').click();
     expect(emitted).toEqual([testCollection]);
+  });
+
+  it('logs preview loading failures and keeps placeholders visible', async () => {
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {});
+    iconifyService.getCollectionIcons.mockReturnValueOnce(throwError(() => new Error('preview failed')));
+
+    fixture = TestBed.createComponent(CollectionCardComponent);
+    component = fixture.componentInstance;
+    component.collection = testCollection;
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    expect(consoleErrorSpy).toHaveBeenCalledWith(
+      '[CollectionCard] Failed to load preview icons:',
+      expect.objectContaining({
+        prefix: 'mdi',
+        error: expect.any(Error)
+      })
+    );
+    expect(fixture.nativeElement.querySelectorAll('.collection-preview-img').length).toBe(0);
+    expect(fixture.nativeElement.querySelectorAll('.preview-placeholder').length).toBe(8);
   });
 });

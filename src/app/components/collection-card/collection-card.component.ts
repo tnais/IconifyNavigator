@@ -188,7 +188,11 @@ export class CollectionCardComponent implements AfterViewInit, OnDestroy {
         this.previewIcons = icons.slice(0, 8);
         this.cdr.detectChanges();
       },
-      error: () => {
+      error: (error) => {
+        console.error('[CollectionCard] Failed to load preview icons:', {
+          prefix: this.collection.prefix,
+          error
+        });
         // On error, leave the grid showing placeholder boxes.
         this.previewIcons = [];
         this.cdr.detectChanges();

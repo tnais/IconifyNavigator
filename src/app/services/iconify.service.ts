@@ -33,7 +33,7 @@ export class IconifyService {
   private readonly maxCollectionsToLoad = 6;
 
   /** Milliseconds before an HTTP request is considered timed out. */
-  private readonly requestTimeoutMs = 8000;
+  private readonly requestTimeoutMs = 20000;
 
   /** Tracks which collection prefixes have already had their icons loaded. */
   private readonly loadedPrefixes = new Set<string>();
@@ -238,23 +238,36 @@ export class IconifyService {
       complete: false
     });
 
-    // Load all prefixes and emit progress for each
-    const loadedCollections = await Promise.all(
-      prefixesToLoad.map(async (prefix, index) => {
-        const collection = await this.loadCollection(prefix);
-        
-        // Emit progress after each collection is loaded
+    let loadedCollectionsCount = 0;
+    const loadedCollections: IconCollection[] = [];
+
+    for (let index = 0; index < prefixesToLoad.length; index += this.maxCollectionsToLoad) {
+      const batch = prefixesToLoad.slice(index, index + this.maxCollectionsToLoad);
+      const results = await Promise.allSettled(batch.map((prefix) => this.loadCollection(prefix)));
+
+      results.forEach((result, batchIndex) => {
+        const prefix = batch[batchIndex];
+        const metadata = current.find((collection) => collection.prefix === prefix);
+        loadedCollectionsCount += 1;
+
+        if (result.status === 'fulfilled') {
+          loadedCollections.push(result.value);
+        } else {
+          console.error('[IconifyService] Failed to load collection during search:', {
+            prefix,
+            error: result.reason
+          });
+        }
+
         this.searchProgress$.next({
           totalCollections: prefixesToLoad.length,
-          loadedCollections: index + 1,
-          currentCollection: collection.name,
-          matchedIcons: collection.icons.length,
-          complete: index + 1 === prefixesToLoad.length
+          loadedCollections: loadedCollectionsCount,
+          currentCollection: metadata?.name || prefix,
+          matchedIcons: result.status === 'fulfilled' ? result.value.icons.length : 0,
+          complete: loadedCollectionsCount === prefixesToLoad.length
         });
-
-        return collection;
-      })
-    );
+      });
+    }
 
     const loadedByPrefix = new Map(loadedCollections.map((collection) => [collection.prefix, collection]));
     const merged = current.map((collection) => loadedByPrefix.get(collection.prefix) || collection);
@@ -298,7 +311,7 @@ export class IconifyService {
         return current;
       }
 
-      const loadedCollections = await Promise.all(prefixesToLoad.map((prefix) => this.loadCollection(prefix)));
+      const loadedCollections = await this.loadCollectionsInBatches(prefixesToLoad);
       const loadedByPrefix = new Map(loadedCollections.map((collection) => [collection.prefix, collection]));
       const merged = current.map((collection) => loadedByPrefix.get(collection.prefix) || collection);
       merged.forEach((collection) => {
@@ -321,7 +334,7 @@ export class IconifyService {
       return current;
     }
 
-    const loadedCollections = await Promise.all(prefixesToLoad.map((prefix) => this.loadCollection(prefix)));
+    const loadedCollections = await this.loadCollectionsInBatches(prefixesToLoad);
     const loadedByPrefix = new Map(loadedCollections.map((collection) => [collection.prefix, collection]));
 
     const merged = current.map((collection) => loadedByPrefix.get(collection.prefix) || collection);
@@ -429,6 +442,29 @@ export class IconifyService {
     };
   }
 
+  /** Loads collections in bounded batches to avoid overwhelming slower Iconify servers. */
+  private async loadCollectionsInBatches(prefixes: string[]): Promise<IconCollection[]> {
+    const loaded: IconCollection[] = [];
+
+    for (let index = 0; index < prefixes.length; index += this.maxCollectionsToLoad) {
+      const batch = prefixes.slice(index, index + this.maxCollectionsToLoad);
+      const results = await Promise.allSettled(batch.map((prefix) => this.loadCollection(prefix)));
+      results.forEach((result, batchIndex) => {
+        if (result.status === 'fulfilled') {
+          loaded.push(result.value);
+          return;
+        }
+
+        console.error('[IconifyService] Failed to load collection during batched load:', {
+          prefix: batch[batchIndex],
+          error: result.reason
+        });
+      });
+    }
+
+    return loaded;
+  }
+
   /**
    * Wraps HttpClient.get() with a timeout and error conversion to Exception.
    * Throws an Error with a human-readable message on timeout or network failure.
@@ -437,6 +473,7 @@ export class IconifyService {
     try {
       return await firstValueFrom(this.http.get<T>(url).pipe(timeout({ first: this.requestTimeoutMs })));
     } catch (error) {
+      console.error('[IconifyService] Request failed:', { resourceName, url, error });
       throw new Error(`Failed to load ${resourceName} from Iconify server: ${this.toErrorMessage(error)}`);
     }
   }
