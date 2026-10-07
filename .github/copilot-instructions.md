@@ -16,6 +16,11 @@
 - **Acceptance tests (Angular)**: `npm run test:robot` (requires Robot Framework installed)
 - **Acceptance tests (React)**: `npm run test:robot:react`
 
+### `src/app/services/iconify.service.spec.ts`
+- **Start the Angular app**: `npm run server` (development server at `http://localhost:4200`)
+- **Run this spec**: `npm test -- --runInBand src/app/services/iconify.service.spec.ts`
+- These unit tests mock HTTP requests; the app server does not need to be running to execute them.
+
 ### Desktop Applications
 - **Build and launch**: `npm run desktop:start`
 - **Package for Windows**: `npm run desktop:package:win`
