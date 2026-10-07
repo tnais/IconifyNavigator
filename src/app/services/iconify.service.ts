@@ -29,7 +29,7 @@ export class IconifyService {
   /** Subject that emits search progress updates as collections are loaded during search. */
   private readonly searchProgress$ = new Subject<SearchProgress>();
 
-  /** Maximum number of collections whose icons are loaded simultaneously during a search. */
+  /** Intended cap for parallel collection loads; the current search loader does not enforce it. */
   private readonly maxCollectionsToLoad = 6;
 
   /** Milliseconds before an HTTP request is considered timed out. */
@@ -94,7 +94,7 @@ export class IconifyService {
 
   /**
    * Fetches all icons belonging to a single collection identified by its prefix.
-   * Results are cached so subsequent calls for the same prefix are instant.
+   * Non-empty results are cached so subsequent calls for the same prefix are instant.
    */
   getCollectionIcons(prefix: string): Observable<Icon[]> {
     return from(this.getCollectionIconsInternal(prefix));

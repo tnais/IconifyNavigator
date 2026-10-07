@@ -10,17 +10,19 @@ import { IconBrowserComponent } from '../icon-browser/icon-browser.component';
 /**
  * IconifyNavigator v1.0.4
  *
- * Main application component for browsing and managing Iconify icon collections.
- * Features:
- * - Icon collection browser with search and filtering
- * - Search by name, category, tags, and icon set name
- * - Icon detail panel with customizable parameters
- * - Dark/light theme support + Mallard themes
- * - Lazy-loaded infinite scroll
- * - Docker containerization support
- * - Desktop app packaging via Electron
+ * Root component that initializes the Iconify service, selects the application
+ * theme, and displays the icon browser after collection metadata is available.
  */
-type ThemeMode = 'light' | 'dark' | 'mallard' | 'mallard-dark' | 'mallard-accent' | 'tiger' | 'tiger-dark' | 'tiger-accent';
+/** Theme identifiers supported by the application and persisted in localStorage. */
+type ThemeMode =
+  | 'light'
+  | 'dark'
+  | 'mallard'
+  | 'mallard-dark'
+  | 'mallard-accent'
+  | 'tiger'
+  | 'tiger-dark'
+  | 'tiger-accent';
 
 @Component({
   selector: 'app-root',
@@ -133,7 +135,7 @@ export class AppComponent implements OnInit {
    * Loads the Iconify server URL and the list of available collections.
    * On success the icon browser is revealed; on failure an error message is shown.
    * The finally block ensures the loading flag is cleared regardless of outcome
-   * and that the OnPush component re-renders via markForCheck + ngZone.run.
+   * and that Angular change detection runs via markForCheck + ngZone.run.
    */
   private async initialize(): Promise<void> {
     try {

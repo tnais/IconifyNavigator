@@ -70,10 +70,10 @@ export interface SearchProgress {
   /** Number of collections that have been loaded and searched so far. */
   loadedCollections: number;
 
-  /** Name of the collection currently being loaded/searched. */
+  /** Name of the most recently loaded collection. */
   currentCollection?: string;
 
-  /** Number of matching icons found so far. */
+  /** Number of icons in the most recently loaded collection. */
   matchedIcons: number;
 
   /** Indicates whether all collections have been processed. */

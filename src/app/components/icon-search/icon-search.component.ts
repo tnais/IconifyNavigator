@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { IconSearchOptions } from '../../models/icon.model';
 
+/** Form for icon search filters; emits parsed options to the parent browser component. */
 @Component({
   selector: 'app-icon-search',
   standalone: true,
@@ -67,7 +68,6 @@ import { IconSearchOptions } from '../../models/icon.model';
     `
   ]
 })
-/** Emits a search event each time the user submits the form or resets it. */
 export class IconSearchComponent {
   /** Notifies the parent component whenever a new search or reset is performed. */
   @Output() search = new EventEmitter<IconSearchOptions>();

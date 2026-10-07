@@ -6,6 +6,7 @@ import { Icon, IconCollection, IconSearchOptions, SearchProgress } from '../../m
 import { IconSearchComponent } from '../icon-search/icon-search.component';
 import { CollectionCardComponent } from '../collection-card/collection-card.component';
 
+/** User-selected parameters used to generate an icon URL and HTML image tag. */
 interface IconTagDialogState {
   color: string;
   width: string;
@@ -475,6 +476,7 @@ export class IconBrowserComponent {
 
   constructor(private iconifyService: IconifyService, private cdr: ChangeDetectorRef) {}
 
+  /** Subscribes to collection-loading progress so it can be reflected in the search UI. */
   ngOnInit(): void {
     // Subscribe to search progress updates
     this.iconifyService.getSearchProgress().subscribe((progress) => {
