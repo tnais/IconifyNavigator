@@ -29,9 +29,6 @@ export class IconifyService {
   /** Subject that emits search progress updates as collections are loaded during search. */
   private readonly searchProgress$ = new Subject<SearchProgress>();
 
-  /** Intended cap for parallel collection loads; the current search loader does not enforce it. */
-  private readonly maxCollectionsToLoad = 6;
-
   /** Milliseconds before an HTTP request is considered timed out. */
   private readonly requestTimeoutMs = 8000;
 
