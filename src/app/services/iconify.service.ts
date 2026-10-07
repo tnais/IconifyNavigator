@@ -435,8 +435,11 @@ export class IconifyService {
    */
   private async requestWithTimeout<T>(url: string, resourceName: string): Promise<T> {
     try {
+      console.debug(`Requesting with timeout ${resourceName} from Iconify server: ${url}`);
       return await firstValueFrom(this.http.get<T>(url).pipe(timeout({ first: this.requestTimeoutMs })));
     } catch (error) {
+      console.debug(error);
+      console.error(`Failed to load ${resourceName} from Iconify server: ${this.toErrorMessage(error)}`);
       throw new Error(`Failed to load ${resourceName} from Iconify server: ${this.toErrorMessage(error)}`);
     }
   }

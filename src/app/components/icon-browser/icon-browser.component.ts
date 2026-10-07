@@ -194,7 +194,7 @@ interface IconTagDialogState {
           <div class="dialog-preview-row">
             <textarea id="icn.tagstring" readonly [value]="tagString"></textarea>
             <div class="preview-square" aria-label="Icon preview" [style.background]="previewSquareBg">
-              <img *ngIf="tagPreviewSrc" [src]="tagPreviewSrc" [alt]="selectedIcon?.name || 'icon preview'" class="preview-img" />
+              <img *ngIf="tagPreviewSrc" [src]="tagPreviewSrc" [alt]="selectedIcon.name || 'icon preview'" class="preview-img" />
             </div>
           </div>
 
