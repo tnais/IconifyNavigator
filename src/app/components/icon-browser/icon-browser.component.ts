@@ -217,9 +217,23 @@ interface IconTagDialogState {
         height: calc(100vh - 140px);
       }
       .left-panel {
-        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+        overflow: hidden;
         padding-right: 8px;
         border-right: 1px solid var(--border-default);
+      }
+      /* Upper part: sized to fit the search panel */
+      .left-panel > app-icon-search {
+        display: block;
+        flex: 0 0 auto;
+      }
+      /* Lower part: remaining height, scrollable */
+      .left-panel > section {
+        flex: 1 1 0;
+        min-height: 0;
+        overflow-y: auto;
       }
       .right-panel {
         overflow-y: auto;
